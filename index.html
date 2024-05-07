@@ -2,17 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
-    <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <title>Hand Tracking Example - A-Frame</title>
+    <meta name="description" content="Hand Tracking Example - A-Frame">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@2.0.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-handtracking-controls@2.0.0/dist/aframe-handtracking-controls.min.js"></script>
   </head>
   <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+    <a-scene physics="gravity: -9.8; debug: true">
+      <!-- Cámara con seguimiento de manos -->
+      <a-entity camera hand-tracking-controls></a-entity>
+
+      <!-- Objeto que se moverá con las manos -->
+      <a-box id="movableBox" position="0 1 -5" color="red" dynamic-body></a-box>
+      
+      <!-- Piso -->
+      <a-plane static-body position="0 0 -5" rotation="-90 0 0" width="50" height="50" color="#7BC8A4"></a-plane>
     </a-scene>
   </body>
 </html>
