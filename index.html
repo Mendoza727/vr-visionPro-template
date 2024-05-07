@@ -6,6 +6,7 @@
         <meta name="description" content="Hand Tracking! • A-Frame" />
         <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
         <script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
         <script src="js/pinchable.js"></script>
         <script src="js/color-change.js"></script>
         <script src="js/slider.js"></script>
@@ -17,7 +18,7 @@
         <script src="js/gesture-color-change.js"></script>
     </head>
     <body>
-        <a-scene environment="preset: forest" physics="debug: true"> <!-- Añade el atributo physics -->
+        <a-scene environment="preset: forest" physics="gravity: -9.8"> <!-- Añade el atributo physics -->
 
             <a-assets>
                 <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
