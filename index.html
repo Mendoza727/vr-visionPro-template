@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Hand Tracking Example - A-Frame</title>
-    <meta name="description" content="Hand Tracking Example - A-Frame">
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@2.0.0/dist/aframe-physics-system.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-handtracking-controls@2.0.0/dist/aframe-handtracking-controls.min.js"></script>
-  </head>
-  <body>
-    <a-scene physics="gravity: -9.8; debug: true">
-      <!-- Cámara con seguimiento de manos -->
-      <a-entity camera hand-tracking-controls></a-entity>
-
-      <!-- Modelos de manos virtuales -->
-      <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
-      <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
-
-      <!-- Objeto que se moverá con las manos -->
-      <a-box id="movableBox" position="0 1 -5" color="red" dynamic-body></a-box>
-      
-      <!-- Piso -->
-      <a-plane static-body position="0 0 -5" rotation="-90 0 0" width="50" height="50" color="#7BC8A4"></a-plane>
-    </a-scene>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Hand Tracking! • A-Frame</title>
+        <meta name="description" content="Hand Tracking! • A-Frame" />
+        <script src="js/aframe-master.min.js"></script>
+        <script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
+        <script src="js/pinchable.js"></script>
+        <script src="js/color-change.js"></script>
+        <script src="js/slider.js"></script>
+        <script src="js/size-change.js"></script>
+        <script src="js/button.js"></script>
+        <script src="js/menu.js"></script>
+        <script src="js/pressable.js"></script>
+        <script src="js/event-manager.js"></script>
+        <script src="js/gesture-color-change.js"></script>
+    </head>
+    <body>
+        <a-scene environment gesture-color-change>
+            <a-cylinder id="cylinderLeft" position="-1 2 -1" radius="0.5" height="1.5" color="#FFFFFF" scale="0.3 0.3 0.3"></a-cylinder>
+            <a-cylinder id="cylinderRight" position="1 2 -1" radius="0.5" height="1.5" color="#FFFFFF" scale="0.3 0.3 0.3"></a-cylinder>
+            <a-entity id="boxGeometry" position="0 2.0 -1" rotation="45 45 0" geometry="primitive: box; height: 0.6; width: 0.6; depth: 0.6" material="color: #ff4b5c" size-change scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="torusGeometry" position="0 2.0 -1" rotation="45 45 0" geometry="primitive: torus; radius: 0.4; radius-tubular: 0.06" material="color: #d2e603" size-change visible="false" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="sphereGeometry" position="0 2.0 -1" rotation="45 45 0" geometry="primitive: sphere; radius: 0.6;" material="color: #fcdab7" size-change visible="false" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="menu" menu position="0 1.5 -0.5" rotation="-45 0 0" event-manager>
+                <a-entity slider position="0 0.10 0"></a-entity>
+                <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0"></a-entity>
+                <a-entity id="boxButton" button="label: box" position="0 0 0"></a-entity>
+                <a-entity id="torusButton" button="label: torus" position="0.15 0 0"></a-entity>
+                <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
+            </a-entity>
+            <a-entity laser-controls="hand: left" hand-tracking-controls="hand: left"></a-entity>
+            <a-entity laser-controls="hand: right" hand-tracking-controls="hand: right"></a-entity>
+        </a-scene>
+    </body>
 </html>
