@@ -13,6 +13,10 @@
       <!-- Cámara con seguimiento de manos -->
       <a-entity camera hand-tracking-controls></a-entity>
 
+      <!-- Modelos de manos virtuales -->
+      <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
+      <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #ffcccc"></a-entity>
+
       <!-- Objeto que se moverá con las manos -->
       <a-box id="movableBox" position="0 1 -5" color="red" dynamic-body></a-box>
       
