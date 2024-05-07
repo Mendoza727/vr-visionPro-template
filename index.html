@@ -19,7 +19,7 @@
         <script src="js/gesture-color-change.js"></script>
     </head>
     <body>
-        <a-scene environment="preset: forest" physics="gravity: -9.8"> <!-- Añade el atributo physics -->
+        <a-scene environment="preset: forest" physics="debug: true;"> <!-- Añade el atributo physics -->
 
             <a-assets>
                 <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
@@ -30,15 +30,23 @@
             <a-cylinder id="cylinderLeft" position="-1 2 -1" radius="0.5" height="1.5" color="#FFFFFF" scale="0.3 0.3 0.3"></a-cylinder>
             <a-cylinder id="cylinderRight" position="1 2 -1" radius="0.5" height="1.5" color="#FFFFFF" scale="0.3 0.3 0.3"></a-cylinder>
             
-
-            <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
-            <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7" scale="0.5 0.5 0.5" dynamic-body grabbable>
-                <!-- Define un evento para manejar la liberación del objeto -->
+            <a-box id="my-box" position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7" scale="0.5 0.5 0.5" dynamic-body grabbable>
                 <a-event name="grab-end" mixin="fall-on-release"></a-event>
             </a-box>
-
-            <a-mixin id="fall-on-release" dynamic-body="linearDamping: 0.1; angularDamping: 0.1;"></a-mixin>
         
+            <!-- Componente que hace que el objeto caiga cuando se suelta -->
+            <a-entity mixin="fall-on-release"></a-entity>
+        
+            <!-- Mixin para que el objeto caiga -->
+            <a-mixin id="fall-on-release">
+                <a-animation attribute="position"
+                             begin="grab-end"
+                             dur="1000"
+                             to="0 0.25 -1"
+                             easing="ease-out-cubic"></a-animation>
+            </a-mixin>
+        
+        </a-scene>
             <a-entity id="menu" menu position="0 1.5 -0.5" rotation="-45 0 0" event-manager>
                 <a-entity slider position="0 0.10 0"></a-entity>
                 <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0"></a-entity>
@@ -47,8 +55,6 @@
                 <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true" position="0 -0.10 0"></a-entity>
             </a-entity>
             
-
-
             <!-- Agrega el sistema de física -->
             <a-entity id="leftHand"  hand-controls="hand: left;"  hand-tracking-controls="hand: left;"   hand-tracking-grab-controls="hand: left;"></a-entity>
             <a-entity id="rightHand" hand-controls="hand: right;" hand-tracking-controls="hand: right;"  hand-tracking-grab-controls="hand: right;"></a-entity>
