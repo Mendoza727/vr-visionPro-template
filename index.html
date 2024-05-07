@@ -22,18 +22,18 @@
         <a-cylinder id="cylinderRight" position="1 2 -1" radius="0.5" height="1.5" color="#FFFFFF" scale="0.3 0.3 0.3"></a-cylinder>
         
         <!-- El cuadro que se puede agarrar y soltar -->
-        <a-box id="my-box" position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7" scale="0.5 0.5 0.5" dynamic-body grabbable></a-box>
+        <a-box id="my-box" position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7" scale="0.5 0.5 0.5" grabbable
+            a-grab-move-controls="grabberHand: right; suppressY: true;"></a-box>
         
         <script>
-            // Obtenemos el elemento del cuadro
-            var box = document.querySelector('#my-box');
-
-            // Añadimos un event listener para el evento 'grab-end'
-            box.addEventListener('grab-end', function () {
-                // Detenemos el movimiento y la física dinámica del cuadro
-                box.body.velocity.set(0, 0, 0);
-                box.body.angularVelocity.set(0, 0, 0);
-                box.removeAttribute('dynamic-body');
+            AFRAME.registerComponent('grabbable', {
+                init: function () {
+                    var el = this.el;
+                    el.addEventListener('grabend', function (event) {
+                        // Deshabilita la física dinámica al soltar
+                        el.body.mass = 0;
+                    });
+                }
             });
         </script>
         
