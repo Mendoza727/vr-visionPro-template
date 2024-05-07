@@ -30,14 +30,14 @@
             <a-cylinder id="cylinderLeft" position="-1 2 -1" radius="0.5" height="1.5" color="#FFFFFF" scale="0.3 0.3 0.3"></a-cylinder>
             <a-cylinder id="cylinderRight" position="1 2 -1" radius="0.5" height="1.5" color="#FFFFFF" scale="0.3 0.3 0.3"></a-cylinder>
             
-            <a-mixin id="fall-on-release">
-                <a-animation attribute="position" dur="1500" easing="ease-out" to="0 0 -0.5"></a-animation>
-            </a-mixin>
 
             <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
             <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7" scale="0.5 0.5 0.5" dynamic-body grabbable>
+                <!-- Define un evento para manejar la liberación del objeto -->
                 <a-event name="grab-end" mixin="fall-on-release"></a-event>
             </a-box>
+
+            <a-mixin id="fall-on-release" dynamic-body="linearDamping: 0.1; angularDamping: 0.1;"></a-mixin>
         
             <a-entity id="menu" menu position="0 1.5 -0.5" rotation="-45 0 0" event-manager>
                 <a-entity slider position="0 0.10 0"></a-entity>
