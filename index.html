@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>Hand Tracking! • A-Frame</title>
     <meta name="description" content="Hand Tracking! • A-Frame" />
@@ -14,108 +15,49 @@
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
-    <script src="js/pinchable.js"></script>
-    <script src="js/color-change.js"></script>
-    <script src="js/slider.js"></script>
-    <script src="js/size-change.js"></script>
-    <script src="js/button.js"></script>
-    <script src="js/menu.js"></script>
-    <script src="js/pressable.js"></script>
-    <script src="js/event-manager.js"></script>
-    <script src="js/gesture-color-change.js"></script>
-  </head>
+</head>
 
-  <body>
-    <a-scene environment="preset: forest" physics="gravity: -9.8">
-      <!-- Añade el atributo physics -->
+<body>
+    <a-scene environment="preset: forest" physics="gravity: -9.8"> <!-- Añade el atributo physics -->
 
-      <a-assets>
-        <a-asset-item
-          id="hospital-room"
-          src="models/hospital-room.glb"
-        ></a-asset-item>
-        <a-asset-item
-          id="jeringa"
-          src="models/jeringa.glb"
-          draggable
-        ></a-asset-item>
-      </a-assets>
+        <a-assets>
+            <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
+            <a-asset-item id="jeringa" src="models/jeringa.glb" draggable></a-asset-item>
+            <a-asset-item id="saxenda" src="models/saxenda.fbx"></a-asset-item>
+        </a-assets>
+        
+        <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
+        <a-entity gltf-model="#jeringa" id="modeloJeringa" scale="0.5 0.5 0.5" position="0 1.5 -0.5" draggable>
+            <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7; transparent: true; opacity: 0.5;" scale="0.5 0.5 0.5" grabbable></a-box>
+        </a-entity>        
 
-      <a-entity
-        gltf-model="#hospital-room"
-        position="0 0.2 -1"
-        scale="0.5 0.5 0.5"
-        draggable="true"
-      ></a-entity>
-      <a-entity
-        gltf-model="#jeringa"
-        id="modeloJeringa"
-        scale="0.5 0.5 0.5"
-        position="0 1.5 -0.5"
-        draggable
-      >
-        <a-box
-          position="0 1.5 -0.5"
-          rotation="0 0 0"
-          material="color: #fcdab7; transparent: true; opacity: 0.5;"
-          scale="0.5 0.5 0.5"
-          grabbable
-        ></a-box>
-      </a-entity>
+        <a-entity 
+            id="saxendaModel" 
+            fbx-model="#saxenda" 
+            scale="0.5 0.5 0.5" 
+            position="0 1.5 -0.5" 
+            draggable="true">
+        </a-entity>
 
-      <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
+        <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
 
-      <a-entity
-        id="menu"
-        menu
-        position="0 1.5 -0.5"
-        rotation="-45 0 0"
-        event-manager
-        visible="false"
-      >
-        <a-entity slider position="0 0.10 0"></a-entity>
-        <a-entity
-          id="sphereButton"
-          button="label: sphere"
-          position="-0.15 0 0"
-        ></a-entity>
-        <a-entity
-          id="boxButton"
-          button="label: box"
-          position="0 0 0"
-        ></a-entity>
-        <a-entity
-          id="torusButton"
-          button="label: torus"
-          position="0.15 0 0"
-        ></a-entity>
-        <a-entity
-          id="darkModeButton"
-          button="label: Dark Mode; width: 0.20; toggable: true"
-          position="0 -0.10 0"
-        ></a-entity>
-      </a-entity>
+        <a-entity id="menu" menu position="0 1.5 -0.5" rotation="-45 0 0" event-manager visible="false">
+            <a-entity slider position="0 0.10 0"></a-entity>
+            <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0"></a-entity>
+            <a-entity id="boxButton" button="label: box" position="0 0 0"></a-entity>
+            <a-entity id="torusButton" button="label: torus" position="0.15 0 0"></a-entity>
+            <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true"
+                position="0 -0.10 0"></a-entity>
+        </a-entity>
 
-      <!-- Agrega el sistema de física -->
-      <a-entity
-        id="leftHand"
-        hand-controls="hand: left;"
-        hand-tracking-controls="hand: left;"
-        hand-tracking-grab-controls="hand: left;"
-      ></a-entity>
-      <a-entity
-        id="rightHand"
-        hand-controls="hand: right;"
-        hand-tracking-controls="hand: right;"
-        hand-tracking-grab-controls="hand: right;"
-      ></a-box>
-      <a-entity
-        id="ground"
-        static-body
-        geometry="primitive: plane; width: 100; height: 100"
-        rotation="-90 0 0"
-        material="visible: false;"
-      ></a-entity>
+        <!-- Agrega el sistema de física -->
+        <a-entity id="leftHand" hand-controls="hand: left;" hand-tracking-controls="hand: left;"
+            hand-tracking-grab-controls="hand: left;"></a-entity>
+        <a-entity id="rightHand" hand-controls="hand: right;" hand-tracking-controls="hand: right;"
+            hand-tracking-grab-controls="hand: right;"></a-entity>
+        <a-entity id="ground" static-body geometry="primitive: plane; width: 100; height: 100" rotation="-90 0 0"
+            material="visible: false;"></a-entity>
     </a-scene>
-  </body>
+</body>
+
 </html>
