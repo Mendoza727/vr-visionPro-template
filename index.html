@@ -12,11 +12,19 @@
 <body>
     <a-scene environment="preset: forest" physics="gravity: -9.8">
 
-        <!-- Agrega el modelo FBX dentro de un elemento a-entity -->
+        <!-- Agrega el modelo FBX -->
         <a-entity id="draggableFbxModel" position="0 1.5 -0.5">
             <a-entity
                 fbx-model="src: url(models/saxenda.fbx); scale: 0.5 0.5 0.5;"
                 material="color: #fcdab7;">
+            </a-entity>
+        </a-entity>
+
+        <!-- Agrega el modelo GLB -->
+        <a-entity id="draggableGlbModel" position="0 2 -1">
+            <a-entity
+                gltf-model="url(models/jeringa.glb); scale: 0.5 0.5 0.5;"
+                material="color: #ff0000;">
             </a-entity>
         </a-entity>
 
@@ -54,6 +62,14 @@
             <a-entity
                 fbx-model="src: url(models/saxenda.fbx); scale: 0.5 0.5 0.5;"
                 material="color: #fcdab7;">
+            </a-entity>
+        </a-entity>
+
+        <!-- Aplica el componente grabbable al elemento que contiene el modelo GLB -->
+        <a-entity id="draggableGlbModelWrapper" grabbable>
+            <a-entity
+                gltf-model="url(models/jeringa.glb); scale: 0.5 0.5 0.5;"
+                material="color: #ff0000;">
             </a-entity>
         </a-entity>
     </a-scene>
