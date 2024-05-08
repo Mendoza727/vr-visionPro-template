@@ -37,11 +37,10 @@
             <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
             <a-asset-item id="jeringa" src="models/jeringa.glb" draggable></a-asset-item>
         </a-assets>
-
-        <a-entity scale="0.5 0.8 0.5" fbx-model="src: url(models/saxenda.fbx);"></a-entity>
+        
+        <a-entity scale="0.5 0.8 0.5" fbx-model="src: url(models/saxenda.fbx);" draggable></a-entity>
         <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
-        <a-entity gltf-model="#jeringa" id="modeloJeringa" scale="0.5 0.5 0.5" position="0 1.5 -0.5"
-            draggable></a-entity>
+        <a-entity gltf-model="#jeringa" id="modeloJeringa" scale="0.5 0.5 0.5" position="0 1.5 -0.5" draggable></a-entity>        
 
         <a-cylinder id="cylinderLeft" position="-1 2 -1" radius="0.5" height="1.5" color="#FFFFFF"
             scale="0.3 0.3 0.3"></a-cylinder>
