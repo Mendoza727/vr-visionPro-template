@@ -1,0 +1,11 @@
+#startingButton {
+    background: linear-gradient(94deg, #6BE5AD 0%, #53AFE4 100.05%);
+    border-radius: 8px;
+    border: none;
+    padding: 11px 23px;
+    font-size: 20px;
+    margin-top: 0px;
+    line-height: 24px;
+    height: 48px;
+    color: black;
+}

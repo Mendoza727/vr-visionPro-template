@@ -15,10 +15,39 @@
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <a-scene environment="preset: forest" physics="gravity: -9.8"> <!-- Añade el atributo physics -->
+    <div id="splash" style="
+            background-color: rgb(31, 32, 33);
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;"
+        >
+        <div style="
+            width: 304px;
+            max-width: 90%;
+            background: rgba(31, 32, 33, 0.78);
+            border-radius: 8px;
+            padding: 50px 20px 50px 20px;
+            box-sizing: border-box;
+        ">
+                <h1 style="color: white;">
+                    Experiencia <span style="color: #6AE5E0;">Inmersiva</span>
+                </h1>
+            <button onclick="showScene()" id="startingButton">Comenzar</buttono>
+        </div>
+    </div>
+
+    <a-scene environment="preset: forest" physics="gravity: -9.8" style="display: none;"> <!-- Añade el atributo physics -->
 
         <a-assets>
             <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
@@ -58,6 +87,14 @@
         <a-entity id="ground" static-body geometry="primitive: plane; width: 100; height: 100" rotation="-90 0 0"
             material="visible: false;"></a-entity>
     </a-scene>
+
+    <script>
+        function showScene() {
+            // Muestra la escena
+            document.querySelector('a-scene').style.display = 'block';
+            document.getElementById('splash').style.display = 'none'
+        }
+    </script>
 </body>
 
 </html>
