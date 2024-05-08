@@ -15,10 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
-    <script src="ar-shadow-helper.js"></script>
-    <script src="ar-cursor.js"></script>
-    <script src="simple-navmesh-constraint.js"></script>
-    <script src="model-utils.js"></script>
     <script src="js/pinchable.js"></script>
     <script src="js/color-change.js"></script>
     <script src="js/slider.js"></script>
@@ -39,26 +35,11 @@
         </a-assets>
         
         <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
-        <a-entity gltf-model="#jeringa" id="modeloJeringa" scale="0.5 0.5 0.5" position="0 1.5 -0.5" draggable></a-entity>        
-
-        <a-cylinder id="cylinderLeft" position="-1 2 -1" radius="0.5" height="1.5" color="#FFFFFF"
-            scale="0.3 0.3 0.3"></a-cylinder>
-        <a-cylinder id="cylinderRight" position="1 2 -1" radius="0.5" height="1.5" color="#FFFFFF"
-            scale="0.3 0.3 0.3"></a-cylinder>
-
-
-
+        
         <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
-        <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7" scale="0.5 0.5 0.5" grabbable></a-box>
-
-        <a-entity id="menu" menu position="0 1.5 -0.5" rotation="-45 0 0" event-manager visible="false">
-            <a-entity slider position="0 0.10 0"></a-entity>
-            <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0"></a-entity>
-            <a-entity id="boxButton" button="label: box" position="0 0 0"></a-entity>
-            <a-entity id="torusButton" button="label: torus" position="0.15 0 0"></a-entity>
-            <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true"
-                position="0 -0.10 0"></a-entity>
-        </a-entity>
+        <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7" scale="0.5 0.5 0.5" grabbable>
+            <a-entity gltf-model="#jeringa" scale="0.5 0.5 0.5" position="0 1.5 -0.5" draggable></a-entity>        
+        </a-box>
 
         <!-- Agrega el sistema de física -->
         <a-entity id="leftHand" hand-controls="hand: left;" hand-tracking-controls="hand: left;"
