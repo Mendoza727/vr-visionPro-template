@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
         buttonIntoVR.click();
-    }, 200)
+    }, 1)
 })
 
 // animation typedJS+
