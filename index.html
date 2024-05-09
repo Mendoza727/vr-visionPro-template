@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <script src="js/main.js" type="module"></script>
   </head>
@@ -34,7 +35,7 @@
     >
       <div
         style="
-          width: 304px;
+          width: 320px;
           max-width: 90%;
           background: rgba(31, 32, 33, 0.78);
           border-radius: 8px;
@@ -78,7 +79,9 @@
           </div>
         </div>
 
-        <h1 id="textLoading" style="margin-top: 12pc; color: white;">Cargando...</h1>
+        <h2 id="textLoading" style="margin-top: 12pc; color: white;">
+            <span id="element" style="margin-top: 2px;"></span>
+        </h2>
 
         <div id="menu">
           <h1 style="color: white">
