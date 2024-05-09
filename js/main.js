@@ -11,7 +11,7 @@ const fbxUrl = 'models/saxenda.fbx';
 document.addEventListener('DOMContentLoaded', () => {
     console.log(button)
     setTimeout(() => {
-        enterVR()
+        requestXR()
         spinner.classList.add('fadeOut');
         textSpinner.classList.add('fadeOut');
         // Mostrar el menú con animación fadeIn después de que la animación de fadeOut haya terminado
