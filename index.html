@@ -1,195 +1,220 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Hand Tracking! • A-Frame</title>
     <meta name="description" content="Hand Tracking! • A-Frame" />
-        <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe-master.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe-master.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="js/main.js" type="module"></script>
+  </head>
 
-<body>
-    <div id="splash" style="
-            background-color: rgb(31, 32, 33);
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;"
-        >
-        <div style="
-            width: 304px;
-            max-width: 90%;
-            background: rgba(31, 32, 33, 0.78);
-            border-radius: 8px;
-            padding: 50px 20px 50px 20px;
-            box-sizing: border-box;
-        ">
-                <h1 style="color: white;">
-                    Experiencia <span style="color: #6AE5E0;">Inmersiva</span>
-                </h1>
-            <button onclick="showScene()" id="startingButton">Comenzar</buttono>
+  <body>
+    <div
+      id="splash"
+      style="
+        background-color: rgb(31, 32, 33);
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      "
+    >
+      <div
+        style="
+          width: 304px;
+          max-width: 90%;
+          background: rgba(31, 32, 33, 0.78);
+          border-radius: 8px;
+          padding: 50px 20px 50px 20px;
+          box-sizing: border-box;
+        "
+      >
+        <!-- spinner load starting inmersive web -->
+        <div class="gearbox" id="spinner">
+          <div class="overlay"></div>
+          <div class="gear one">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="gear two">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="gear three">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="gear four large">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
         </div>
+
+        <h1 id="textLoading" style="margin-top: 12pc; color: white;">Cargando...</h1>
+
+        <div id="menu">
+          <h1 style="color: white">
+            Experiencia <span style="color: #6ae5e0">Inmersiva</span>
+          </h1>
+          <button onclick="showScene()" id="startingButton">Comenzar</button>
+        </div>
+      </div>
     </div>
 
-    
+    <a-scene
+      environment="preset: forest"
+      physics="gravity: -9.8"
+      style="display: none"
+    >
+      <!-- Añade el atributo physics -->
 
-    <a-scene environment="preset: forest" physics="gravity: -9.8" style="display: none;"> <!-- Añade el atributo physics -->
-        <a-entity id="cameraRig" simple-navmesh-constraint="navmesh:.navmesh;fall:0.5;height:0;exclude:.navmesh-hole;" movement-controls="speed:0.15;camera:#head;" position="-1 0 1" rotation="0 45 0" origin-on-ar-start="" gamepad-controls="" trackpad-controls="" keyboard-controls="" touch-controls="">
-            <!-- camera -->
-            <a-entity id="head" camera="near:0.01;" look-controls="pointerLockEnabled: false" position="0 1.65 0" rotation=""></a-entity>
-        
-            
-            <!-- Hand tracking -->
-            <a-entity handy-controls="right:#right-gltf;materialOverride:right;" material="color:gold;metalness:1;roughness:0;">
-              
-              <!-- For screen space inputs like mobile AR -->
-              <a-torus radius="0.008" radius-tubular="0.001" material="shader:flat;color:blue" data-none="screen-0" geometry=""></a-torus>
-              <a-torus radius="0.008" radius-tubular="0.001" material="shader:flat;color:green" data-none="screen-1" geometry=""></a-torus>
-              <a-torus radius="0.008" radius-tubular="0.001" material="shader:flat;color:red" data-none="screen-2" geometry=""></a-torus>
-              
-              <!-- Put an exit button on the wrist for handtracking -->
-              <a-gltf-model src="https://cdn.glitch.global/d29f98b4-ddd1-4589-8b66-e2446690e697/watch.glb?v=1645016979219" data-left="wrist" position="-1000 0 0" gltf-model="">
-                <a-sphere radius="0.02" position="0 0.02 0" sphere-collider="radius:0.02;objects:[data-right$=-tip];" exit-on="hitend" visible="false" material="" geometry=""></a-sphere>
-              </a-gltf-model>
-              
-              
-              <!-- Use the finger tips for teleporting when the user points -->
-              <a-entity data-right="index-finger-tip" mixin="blink" blink-controls="snapTurn:false;startEvents:pose_point_fuseShort;endEvents:pose_point_fuseLong;cancelEvents:pose_cancel_point;"></a-entity>
-              <a-entity data-left="index-finger-tip" mixin="blink" blink-controls="snapTurn:false;startEvents:pose_point_fuseShort;endEvents:pose_point_fuseLong;cancelEvents:pose_cancel_point;"></a-entity>
-      
-              <!-- The direction hands are facing, we will also attach labels to show the currently detected pose or controller button -->
-              <!-- These also do teleportaion for Blink controls in VR -->
-              <a-entity data-right="ray" mixin="blink" cursor="" raycaster="objects:[html];far:0.3;showLine:false;lineColor:black;" blink-controls="">
-                <a-entity position="0 0 -0.22" visible="false" class="pose-label" text="value: Hello World; align: center;"></a-entity>
-              </a-entity>
-              <a-entity data-left="ray" mixin="blink" cursor="" raycaster="objects:[html];far:0.3;showLine:false;lineColor:black;" blink-controls="">
-                <a-entity position="0 0 -0.22" visible="false" class="pose-label" text="value: Hello World; align: center;"></a-entity>
-              </a-entity>
-              
-              <!-- These get drawn towards grabable objects, moving the whole hand and the attached elements-->
-              <a-entity id="left-magnet" data-left="grip" data-magnet="magnet-left" grab-magnet-target="startEvents:squeezestart,pose_fist;stopEvents:pose_flat_fuseShort,squeezeend;noMagnetEl:#left-no-magnet;"></a-entity>
-              <a-entity id="right-magnet" data-right="grip" data-magnet="magnet-right" grab-magnet-target="startEvents:squeezestart,pose_fist;stopEvents:pose_flat_fuseShort,squeezeend;noMagnetEl:#right-no-magnet;"></a-entity>
-          
-              <!-- markers to let us know the real location of the hands, you probably want to make them visible="false" or just make them empty <a-entities> -->
-              <a-entity id="left-no-magnet" data-left="grip" data-no-magnet="">
-                <a-entity html="html:#my-interface;cursor:#cursor" position="-0.142 -0.0166 -0.02928" rotation="-80 90 0" scale="0.7 0.7 0.7"></a-entity>
-              </a-entity>
-              <a-entity id="right-no-magnet" data-right="grip" data-no-magnet=""></a-entity>
-              
-              <!-- Invisible objects at the tips of each finger for physics or intersections -->
-              <a-sphere data-right="index-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-right="middle-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-right="ring-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-right="pinky-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-right="thumb-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-left="index-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-left="middle-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-left="ring-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-left="pinky-finger-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-              <a-sphere data-left="thumb-tip" radius="0.004" visible="false" physx-body="type: kinematic;" material="" geometry="" physx-material="" grab-options="scalable"></a-sphere>
-            </a-entity>
-          </a-entity>
+      <a-assets>
+        <a-asset-item
+          id="hospital-room"
+          src="models/hospital-room.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="jeringa"
+          src="models/jeringa.glb"
+          draggable
+        ></a-asset-item>
+      </a-assets>
 
+      <a-entity
+        gltf-model="#hospital-room"
+        position="0 0.2 -1"
+        scale="0.5 0.5 0.5"
+        draggable="true"
+      ></a-entity>
+      <a-box
+        position="0 1.5 -0.5"
+        rotation="0 0 0"
+        material="color: #fcdab7; transparent: true; opacity: 0.0;"
+        scale="0.5 0.5 0.5"
+        grabbable
+      >
+        <a-entity
+          fbx-model="src: url(models/saxenda.fbx);"
+          position="0 0 -0.1"
+          scale="0.3 0.3 0.3"
+          id="parentEntity"
+        ></a-entity>
+      </a-box>
 
-        <a-assets>
-            <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
-            <a-asset-item id="jeringa" src="models/jeringa.glb" draggable></a-asset-item>
-        </a-assets>
-        
-        <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
-        <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7; transparent: true; opacity: 0.0;" scale="0.5 0.5 0.5" grabbable>       
-            <a-entity fbx-model="src: url(models/saxenda.fbx);" position="0 0 -0.1" scale="0.3 0.3 0.3" id="parentEntity"></a-entity>
-        </a-box>
-        
+      <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
 
+      <a-entity
+        id="menu"
+        menu
+        position="0 1.5 -0.5"
+        rotation="-45 0 0"
+        event-manager
+        visible="false"
+      >
+        <a-entity slider position="0 0.10 0"></a-entity>
+        <a-entity
+          id="sphereButton"
+          button="label: sphere"
+          position="-0.15 0 0"
+        ></a-entity>
+        <a-entity
+          id="boxButton"
+          button="label: box"
+          position="0 0 0"
+        ></a-entity>
+        <a-entity
+          id="torusButton"
+          button="label: torus"
+          position="0.15 0 0"
+        ></a-entity>
+        <a-entity
+          id="darkModeButton"
+          button="label: Dark Mode; width: 0.20; toggable: true"
+          position="0 -0.10 0"
+        ></a-entity>
+      </a-entity>
 
-        <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
-
-        <a-entity id="menu" menu position="0 1.5 -0.5" rotation="-45 0 0" event-manager visible="false">
-            <a-entity slider position="0 0.10 0"></a-entity>
-            <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0"></a-entity>
-            <a-entity id="boxButton" button="label: box" position="0 0 0"></a-entity>
-            <a-entity id="torusButton" button="label: torus" position="0.15 0 0"></a-entity>
-            <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true"
-                position="0 -0.10 0"></a-entity>
-        </a-entity>
-
-        <!-- Agrega el sistema de física -->
-        <a-entity id="leftHand" hand-controls="hand: left;" hand-tracking-controls="hand: left;"
-            hand-tracking-grab-controls="hand: left;"></a-entity>
-        <a-entity id="rightHand" hand-controls="hand: right;" hand-tracking-controls="hand: right;"
-            hand-tracking-grab-controls="hand: right;"></a-entity>
-        <a-entity id="ground" static-body geometry="primitive: plane; width: 100; height: 100" rotation="-90 0 0"
-            material="visible: false;"></a-entity>
+      <!-- Agrega el sistema de física -->
+      <a-entity
+        id="leftHand"
+        hand-controls="hand: left;"
+        hand-tracking-controls="hand: left;"
+        hand-tracking-grab-controls="hand: left;"
+      ></a-entity>
+      <a-entity
+        id="rightHand"
+        hand-controls="hand: right;"
+        hand-tracking-controls="hand: right;"
+        hand-tracking-grab-controls="hand: right;"
+      ></a-entity>
+      <a-entity
+        id="ground"
+        static-body
+        geometry="primitive: plane; width: 100; height: 100"
+        rotation="-90 0 0"
+        material="visible: false;"
+      ></a-entity>
     </a-scene>
 
     <script>
-        let movementType = 'teleport';
-        function toggleThumbstick(detail) {
-          const rayPointers = ['[data-right="ray"]', '[data-left="ray"]'].map(s => document.querySelector(s));
-          const type = detail.value;
-          movementType = type;
-          if (type === 'move') {
-            cameraRig.setAttribute('movement-controls', 'enabled', true);
-            for (const p of rayPointers) p.removeAttribute('mixin');
-          }
-          if (type === 'teleport') {
-            cameraRig.setAttribute('movement-controls', 'enabled', false);
-            for (const p of rayPointers) p.setAttribute('mixin', 'blink');
-          }
-        }
-        // If the user is teleporting disable movement-controls in XR
-        const sceneEl = document.querySelector("a-scene");
-        sceneEl.addEventListener("enter-vr", function() {
-          if (movementType === 'teleport') {
-            cameraRig.setAttribute('movement-controls', 'enabled', false);
-          }
-        });
-        sceneEl.addEventListener("exit-vr", function() {
-          cameraRig.setAttribute('movement-controls', 'enabled', true);
-        });
-      
+      function showScene() {
+        // Muestra la escena
+        document.querySelector("a-scene").style.display = "block";
+        document.getElementById("splash").style.display = "none";
+      }
 
-        function showScene() {
-            // Muestra la escena
-            document.querySelector('a-scene').style.display = 'block';
-            document.getElementById('splash').style.display = 'none'
-        }
+      // Cargar el modelo FBX
+      const fbxUrl = "models/saxenda.fbx";
 
-        // Cargar el modelo FBX
-        const fbxUrl = 'models/saxenda.fbx';
+      // Cargar el modelo FBX
+      const loader = new THREE.FBXLoader();
+      loader.load(fbxUrl, function (fbx) {
+        fbx.children.forEach((child) => {
+          // Crear el tooltip para el hijo actual
+          const tooltip = document.createElement("a-entity");
+          tooltip.setAttribute("position", "0 0 0"); // Ajusta la posición según sea necesario
+          tooltip.setAttribute("text", {
+            value: child.name,
+            color: "black",
+            align: "center",
+          }); // Establece el texto del tooltip
 
-        // Cargar el modelo FBX
-        const loader = new THREE.FBXLoader();
-        loader.load(fbxUrl, function (fbx) {
-          fbx.children.forEach((child) => {
-            // Crear el tooltip para el hijo actual
-            const tooltip = document.createElement('a-entity');
-            tooltip.setAttribute('position', '0 0 0'); // Ajusta la posición según sea necesario
-            tooltip.setAttribute('text', {value: child.name, color: 'black', align: 'center'}); // Establece el texto del tooltip
-            
-            // Adjuntar el tooltip al hijo actual
-            child.add(tooltip.object3D);
-          });
-          
-          // Agregar el modelo FBX con los tooltips al componente padre
-          const parentEntity = document.getElementById('parentEntity');
-          parentEntity.setObject3D('mesh', fbx.object3D);
+          // Adjuntar el tooltip al hijo actual
+          child.add(tooltip.object3D);
         });
+
+        // Agregar el modelo FBX con los tooltips al componente padre
+        const parentEntity = document.getElementById("parentEntity");
+        parentEntity.setObject3D("mesh", fbx.object3D);
+      });
     </script>
-</body>
-
+  </body>
 </html>
