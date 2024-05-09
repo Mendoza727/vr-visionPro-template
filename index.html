@@ -93,6 +93,21 @@
             // Muestra la escena
             document.querySelector('a-scene').style.display = 'block';
             document.getElementById('splash').style.display = 'none'
+
+            if ('xr' in navigator) {
+                if ('xr' in navigator) {
+                    navigator.xr.requestDevice().then((device) => {
+                      // Permiso concedido
+                      console.log('Se concedieron permisos para XR');
+                    }).catch((error) => {
+                      // Permiso denegado o error
+                      console.error('Error al solicitar permisos para XR:', error);
+                    });
+                  } else {
+                    // Navegador no compatible con WebXR
+                    console.error('Este navegador no es compatible con WebXR');
+                  }
+            }
         }
     </script>
 </body>
