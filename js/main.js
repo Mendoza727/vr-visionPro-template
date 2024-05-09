@@ -52,16 +52,10 @@ var typed2 = new Typed('#element', {
 
 startingButton.addEventListener('click', () => {
     // mostramos la escena 
-    document.querySelector('a-scene').style.display = 'block';
-    document.getElementById('splash').style.display = 'none';
     buttonIntoVR.click();
 
-    buttonIntoVR.addEventListener('click', function(event) {
-        // Verifica si el evento se originó por una acción del usuario o no
-        if (event.isTrusted) {
-            console.log('El botón se ha clicado manualmente.');
-        } else {
-            console.log('El botón se ha clicado automáticamente.');
-        }
-    });
+    setTimeout(() => {
+        document.querySelector('a-scene').style.display = 'block';
+        document.getElementById('splash').style.display = 'none';
+    }, 2000);
 });
