@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         spinner.classList.add('fadeOut');
         textSpinner.classList.add('fadeOut');
 
-        requestXRPermissions(); 
+        requestPermissions(); 
         // Mostrar el menú con animación fadeIn después de que la animación de fadeOut haya terminado
         setTimeout(() => {
             // Esconder el loading
@@ -35,42 +35,24 @@ startingButton.addEventListener('click', () => {
 
 
 // permisos para immersive experience
-function requestXRPermissions() {
+function requestPermissions() {
     if ('xr' in navigator) {
-        navigator.xr.requestDevice({ optionalFeatures: ['camera'] }).then(() => {
-            // Permiso concedido para WebXR y acceso a la cámara
-            console.log('Permisos concedidos para WebXR y acceso a la cámara.');
-            // Aquí puedes llamar a otra función para continuar con la lógica de tu aplicación
+        navigator.xr.supportsSession('immersive-vr').then((supported) => {
+            alert('¿La sesión immersive-vr es compatible?', supported);
+            if (supported) {
+                // La sesión es compatible, puedes solicitar los permisos y continuar
+                console.log('Solicitar permisos...');
+                alert("Solicitar permisos...", supported)
+            } else {
+                // La sesión no es compatible, manejar el caso en consecuencia
+                alert('La sesión immersive-vr no es compatible con este dispositivo o navegador.', supported);
+            }
         }).catch((error) => {
-            // Manejar el error si el usuario no otorga permiso para WebXR
-            console.error('Error al solicitar permisos para WebXR:', error);
+            // Manejar errores
+            console.error('Error al verificar la compatibilidad de la sesión immersive-vr:', error);
         });
     } else {
-        console.error('WebXR no es compatible con este navegador.');
+        console.warn('La API de WebXR no está disponible en este navegador.');
+        alert("La API de WebXR no está disponible en este navegador.")
     }
-}
-
-// permiso para el rastreo de las manos
-function requestHandTrackingPermission() {
-    navigator.permissions.query({ name: 'xr-hand-tracking' }).then((result) => {
-        if (result.state === 'granted') {
-            // Permiso concedido para el rastreo de manos
-            showScene();
-        } else {
-            // Solicitar permiso para el rastreo de manos
-            result.onchange = () => {
-                if (result.state === 'granted') {
-                    // Permiso concedido para el rastreo de manos
-                    showScene();
-                } else {
-                    console.error('El usuario no otorgó permiso para el rastreo de manos.');
-                }
-            };
-            console.log('Solicitando permiso para el rastreo de manos...');
-            result.prompt();
-        }
-    }).catch((error) => {
-        // Manejar cualquier error al solicitar permisos de rastreo de manos
-        console.error('Error al solicitar permisos de rastreo de manos:', error);
-    });
 }
