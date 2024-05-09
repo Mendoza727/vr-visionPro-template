@@ -54,8 +54,5 @@ startingButton.addEventListener('click', () => {
     // mostramos la escena 
     buttonIntoVR.click();
 
-    setTimeout(() => {
-        document.querySelector('a-scene').style.display = 'block';
-        document.getElementById('splash').style.display = 'none';
-    }, 20000);
+    
 });
