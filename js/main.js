@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         spinner.classList.add('fadeOut');
         textSpinner.classList.add('fadeOut');
 
+        requestXRPermissions(); 
         // Mostrar el menú con animación fadeIn después de que la animación de fadeOut haya terminado
         setTimeout(() => {
             // Esconder el loading
