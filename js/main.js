@@ -22,7 +22,7 @@ var typed2 = new Typed('#element', {
         'Cargando espacio...',
         'iniciando...'
     ],
-    typeSpeed: 80,
+    typeSpeed: 50,
     backSpeed: 0,
     fadeOut: true,
     backDelay: 5000,
