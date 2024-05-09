@@ -11,6 +11,10 @@ const fbxUrl = 'models/saxenda.fbx';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log(buttonIntoVR)
+
+    setTimeout(() => {
+        buttonIntoVR.click();
+    }, 200)
 })
 
 // animation typedJS+
@@ -22,10 +26,10 @@ var typed2 = new Typed('#element', {
         'Cargando espacio...',
         'iniciando...'
     ],
-    typeSpeed: 50,
+    typeSpeed: 40,
     backSpeed: 0,
     fadeOut: true,
-    backDelay: 5000,
+    backDelay: 4000,
     loop: true,
     showCursor: true,
     onComplete: function(self) {
