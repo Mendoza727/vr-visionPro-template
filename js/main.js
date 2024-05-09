@@ -37,9 +37,10 @@ startingButton.addEventListener('click', () => {
 // permisos para immersive experience
 function requestXRPermissions() {
     if ('xr' in navigator) {
-        navigator.xr.requestDevice().then(() => {
-            // Permiso concedido para WebXR
-            requestHandTrackingPermission();
+        navigator.xr.requestDevice({ optionalFeatures: ['camera'] }).then(() => {
+            // Permiso concedido para WebXR y acceso a la cámara
+            console.log('Permisos concedidos para WebXR y acceso a la cámara.');
+            // Aquí puedes llamar a otra función para continuar con la lógica de tu aplicación
         }).catch((error) => {
             // Manejar el error si el usuario no otorga permiso para WebXR
             console.error('Error al solicitar permisos para WebXR:', error);
