@@ -31,3 +31,44 @@ startingButton.addEventListener('click', () => {
     document.querySelector('a-scene').style.display = 'block';
     document.getElementById('splash').style.display = 'none';
 });
+
+
+// permisos para immersive experience
+function requestXRPermissions() {
+    if ('xr' in navigator) {
+        navigator.xr.requestDevice().then(() => {
+            // Permiso concedido para WebXR
+            requestHandTrackingPermission();
+        }).catch((error) => {
+            // Manejar el error si el usuario no otorga permiso para WebXR
+            console.error('Error al solicitar permisos para WebXR:', error);
+        });
+    } else {
+        console.error('WebXR no es compatible con este navegador.');
+    }
+}
+
+// permiso para el rastreo de las manos
+function requestHandTrackingPermission() {
+    navigator.permissions.query({ name: 'xr-hand-tracking' }).then((result) => {
+        if (result.state === 'granted') {
+            // Permiso concedido para el rastreo de manos
+            showScene();
+        } else {
+            // Solicitar permiso para el rastreo de manos
+            result.onchange = () => {
+                if (result.state === 'granted') {
+                    // Permiso concedido para el rastreo de manos
+                    showScene();
+                } else {
+                    console.error('El usuario no otorgó permiso para el rastreo de manos.');
+                }
+            };
+            console.log('Solicitando permiso para el rastreo de manos...');
+            result.prompt();
+        }
+    }).catch((error) => {
+        // Manejar cualquier error al solicitar permisos de rastreo de manos
+        console.error('Error al solicitar permisos de rastreo de manos:', error);
+    });
+}
