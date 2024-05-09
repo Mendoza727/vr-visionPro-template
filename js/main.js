@@ -2,11 +2,16 @@ const spinner = document.getElementById('spinner');
 const textSpinner = document.getElementById('textLoading');
 const menu = document.getElementById('menu');
 const typedCursor = document.getElementsByClassName('typed-cursor');
-const button = document.getElementsByClassName('a-enter-vr-button');
+const buttonIntoVR = document.getElementById('myEnterVRButton')
 
 const startingButton = document.getElementById('startingButton');
 
 const fbxUrl = 'models/saxenda.fbx';
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log(buttonIntoVR)
+})
 
 // animation typedJS+
 var typed2 = new Typed('#element', {
