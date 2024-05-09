@@ -1,14 +1,17 @@
 const spinner = document.getElementById('spinner');
 const textSpinner = document.getElementById('textLoading');
 const menu = document.getElementById('menu');
+const button = document.getElementsByClassName('a-enter-vr-button');
 
 const startingButton = document.getElementById('startingButton');
 
 const fbxUrl = 'models/saxenda.fbx';
 
 // inicializamos con un spinner
-document.addEventListener('DOMContentLoaded', async() => {
-    setTimeout(async() => {
+document.addEventListener('DOMContentLoaded', () => {
+    console.log(button)
+    setTimeout(() => {
+        enterVR()
         spinner.classList.add('fadeOut');
         textSpinner.classList.add('fadeOut');
         // Mostrar el menú con animación fadeIn después de que la animación de fadeOut haya terminado
@@ -24,6 +27,21 @@ document.addEventListener('DOMContentLoaded', async() => {
     }, 800)
 })
 
+async function enterVR() {
+    try {
+        // Solicitar acceso al modo VR
+        const session = await navigator.xr.requestSession('immersive-vr');
+
+        // Solicitar acceso a los sensores del dispositivo
+        await session.requestReferenceSpace('local-floor');
+
+        // Mostrar un mensaje si se conceden los permisos
+        console.log('Permisos de VR y sensores del dispositivo concedidos.');
+    } catch (error) {
+        // Manejar cualquier error que pueda ocurrir
+        console.error('Error al solicitar permisos de VR y sensores del dispositivo:', error);
+    }
+}
 
 startingButton.addEventListener('click', () => {
     // mostramos la escena 
