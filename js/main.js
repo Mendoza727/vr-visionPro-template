@@ -57,5 +57,5 @@ startingButton.addEventListener('click', () => {
     setTimeout(() => {
         document.querySelector('a-scene').style.display = 'block';
         document.getElementById('splash').style.display = 'none';
-    }, 2000);
+    }, 20000);
 });
