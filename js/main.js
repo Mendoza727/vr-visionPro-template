@@ -37,15 +37,23 @@ startingButton.addEventListener('click', () => {
 // permisos para immersive experience
 function requestPermissions() {
     if ('xr' in navigator) {
-        navigator.xr.supportsSession('immersive-vr').then((supported) => {
-            alert('¿La sesión immersive-vr es compatible?', supported);
+        navigator.xr.isSessionSupported('immersive-vr').then((supported) => {
             if (supported) {
                 // La sesión es compatible, puedes solicitar los permisos y continuar
                 console.log('Solicitar permisos...');
-                alert("Solicitar permisos...", supported)
+                navigator.xr.requestSession('immersive-vr', {
+                    requiredFeatures: ['local-floor', 'hand-tracking'],
+                    optionalFeatures: ['bounded-floor', 'hand-tracking-gestures']
+                }).then((session) => {
+                    // La sesión de VR inmersiva se ha iniciado correctamente
+                    console.log('Sesión de VR inmersiva iniciada:', session);
+                }).catch((error) => {
+                    // Manejar el error si la sesión no se puede iniciar
+                    console.error('Error al iniciar la sesión de VR inmersiva:', error);
+                });
             } else {
                 // La sesión no es compatible, manejar el caso en consecuencia
-                alert('La sesión immersive-vr no es compatible con este dispositivo o navegador.', supported);
+                console.log('La sesión immersive-vr no es compatible con este dispositivo o navegador.');
             }
         }).catch((error) => {
             // Manejar errores
@@ -53,6 +61,5 @@ function requestPermissions() {
         });
     } else {
         console.warn('La API de WebXR no está disponible en este navegador.');
-        alert("La API de WebXR no está disponible en este navegador.")
     }
 }
