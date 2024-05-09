@@ -1,47 +1,50 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Experiencia Inmersiva</title>
-    <head>
-      <meta charset="utf-8" />
-      <title>Saxenda Experience Immersive</title>
-      <meta name="description" content="Hand Tracking! • A-Frame" />
-      <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe-master.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
-      <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-      <link rel="stylesheet" href="styles.css" />
-      <script src="js/main.js" type="module"></script>
-    </head>
+    <meta charset="utf-8" />
+    <title>Saxenda Experience Immersive</title>
+    <meta name="description" content="Hand Tracking! • A-Frame" />
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe-master.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="js/main.js" type="module"></script>
   </head>
+
   <body>
-    <a-scene
-      physics="gravity: -9.8"
-      xr-mode-ui="enterVRButton: #myEnterVRButton"
+    <div
+      id="splash"
+      style="
+        background-color: rgb(31, 32, 33);
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      "
     >
-      <!-- Splash Screen -->
-      <a-entity
-        id="splash"
+      <div
         style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-color: black;
+          width: 320px;
+          max-width: 90%;
+          background: rgba(31, 32, 33, 0.78);
+          border-radius: 8px;
+          padding: 50px 20px 50px 20px;
+          box-sizing: border-box;
         "
       >
-        <!-- Spinner -->
-        <div class="gearbox" id="spinner" style="margin-bottom: 20px">
+        <!-- spinner load starting inmersive web -->
+        <div class="gearbox" id="spinner">
           <div class="overlay"></div>
           <div class="gear one">
             <div class="gear-inner">
@@ -76,20 +79,94 @@
           </div>
         </div>
 
-        <!-- Texto de carga -->
-        <h2 id="textLoading" style="margin-top: 12pc; color: white">
-          <span id="element" style="margin-top: 2px">Cargando...</span>
+        <h2 id="textLoading" style="margin-top: 12pc; color: white;">
+            <span id="element" style="margin-top: 2px;"></span>
         </h2>
 
-        <!-- Botón de inicio -->
         <div id="menu">
           <h1 style="color: white">
             Experiencia <span style="color: #6ae5e0">Inmersiva</span>
           </h1>
           <button id="startingButton">Comenzar</button>
         </div>
+      </div>
+    </div>
+
+    <a-scene
+      environment="preset: forest"
+      physics="gravity: -9.8"
+      style="display: none"
+      xr-mode-ui="enterVRButton: #myEnterVRButton"
+    >
+      <!-- Añade el atributo physics -->
+
+      <a-assets>
+        <a-asset-item
+          id="hospital-room"
+          src="models/hospital-room.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="jeringa"
+          src="models/jeringa.glb"
+          draggable
+        ></a-asset-item>
+      </a-assets>
+
+      <a-entity
+        gltf-model="#hospital-room"
+        position="0 0.2 -1"
+        scale="0.5 0.5 0.5"
+        draggable="true"
+      ></a-entity>
+      <a-box
+        position="0 1.5 -0.5"
+        rotation="0 0 0"
+        material="color: #fcdab7; transparent: true; opacity: 0.0;"
+        scale="0.5 0.5 0.5"
+        grabbable
+      >
+        <a-entity
+          fbx-model="src: url(models/saxenda.fbx);"
+          position="0 0 -0.1"
+          scale="0.3 0.3 0.3"
+          id="parentEntity"
+        ></a-entity>
+      </a-box>
+
+      <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
+
+      <a-entity
+        id="menu"
+        menu
+        position="0 1.5 -0.5"
+        rotation="-45 0 0"
+        event-manager
+        visible="false"
+      >
+        <a-entity slider position="0 0.10 0"></a-entity>
+        <a-entity
+          id="sphereButton"
+          button="label: sphere"
+          position="-0.15 0 0"
+        ></a-entity>
+        <a-entity
+          id="boxButton"
+          button="label: box"
+          position="0 0 0"
+        ></a-entity>
+        <a-entity
+          id="torusButton"
+          button="label: torus"
+          position="0.15 0 0"
+        ></a-entity>
+        <a-entity
+          id="darkModeButton"
+          button="label: Dark Mode; width: 0.20; toggable: true"
+          position="0 -0.10 0"
+        ></a-entity>
       </a-entity>
 
+      <!-- Agrega el sistema de física -->
       <a-entity
         id="leftHand"
         hand-controls="hand: left;"
@@ -102,22 +179,15 @@
         hand-tracking-controls="hand: right;"
         hand-tracking-grab-controls="hand: right;"
       ></a-entity>
+      <a-entity
+        id="ground"
+        static-body
+        geometry="primitive: plane; width: 100; height: 100"
+        rotation="-90 0 0"
+        material="visible: false;"
+      ></a-entity>
 
-      <!-- Botón para entrar en VR -->
-      <a
-        type="button"
-        id="myEnterVRButton"
-        style="z-index: 999999; position: fixed"
-        >Entrar en VR</a
-      >
+      <a type="button" id="myEnterVRButton" style="z-index: 999999; position: fixed">Entrar en VR</a>
     </a-scene>
-
-    <!-- Script para ocultar el splash después de cargar -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Ocultar el splash
-        document.getElementById("splash").style.display = "none";
-      });
-    </script>
   </body>
 </html>
