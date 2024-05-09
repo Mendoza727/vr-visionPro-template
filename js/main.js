@@ -27,8 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 800)
 })
 
-async function enterVR() {
+async function requestXR() {
     try {
+        // Verificar si la activación del usuario es necesaria
+        if (!document.xr && 'xr' in navigator) {
+            await navigator.xr.requestDevice();
+        }
+
         // Solicitar acceso al modo VR
         const session = await navigator.xr.requestSession('immersive-vr');
 
