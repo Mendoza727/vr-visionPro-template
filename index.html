@@ -1,83 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Experiencia Inmersiva</title>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-</head>
-<body>
-
-<a-scene
-  environment="preset: forest"
-  physics="gravity: -9.8"
-  xr-mode-ui="enterVRButton: #myEnterVRButton"
->
-
-  <!-- Splash Screen -->
-  <a-entity id="splash" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: absolute; width: 100%; height: 100%; background-color: rgba(31, 32, 33, 0.78);">
-    <!-- Spinner -->
-    <div class="gearbox" id="spinner" style="margin-bottom: 20px;">
-      <div class="overlay"></div>
-      <div class="gear one">
-        <div class="gear-inner">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Experiencia Inmersiva</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene
+      environment="preset: forest"
+      physics="gravity: -9.8"
+      xr-mode-ui="enterVRButton: #myEnterVRButton"
+    >
+      <!-- Splash Screen -->
+      <a-entity
+        id="splash"
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(31, 32, 33, 0.78);
+        "
+      >
+        <!-- Spinner -->
+        <div class="gearbox" id="spinner" style="margin-bottom: 20px">
+          <div class="overlay"></div>
+          <div class="gear one">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="gear two">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="gear three">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="gear four large">
+            <div class="gear-inner">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="gear two">
-        <div class="gear-inner">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
+
+        <!-- Texto de carga -->
+        <h2 id="textLoading" style="margin-top: 12pc; color: white">
+          <span id="element" style="margin-top: 2px"></span>
+        </h2>
+
+        <!-- Botón de inicio -->
+        <div id="menu">
+          <h1 style="color: white">
+            Experiencia <span style="color: #6ae5e0">Inmersiva</span>
+          </h1>
+          <button id="startingButton">Comenzar</button>
         </div>
-      </div>
-      <div class="gear three">
-        <div class="gear-inner">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </div>
-      </div>
-      <div class="gear four large">
-        <div class="gear-inner">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </div>
-      </div>
-    </div>
+      </a-entity>
 
-    <!-- Texto de carga -->
-    <h2 id="textLoading" style="margin-top: 12pc; color: white;">
-      <span id="element" style="margin-top: 2px;"></span>
-    </h2>
+      <!-- Agrega el sistema de física -->
+      <a-entity
+        id="leftHand"
+        hand-controls="hand: left;"
+        hand-tracking-controls="hand: left;"
+        hand-tracking-grab-controls="hand: left;"
+      ></a-entity>
+      <a-entity
+        id="rightHand"
+        hand-controls="hand: right;"
+        hand-tracking-controls="hand: right;"
+        hand-tracking-grab-controls="hand: right;"
+      ></a-entity>
+      <a-entity
+        id="ground"
+        static-body
+        geometry="primitive: plane; width: 100; height: 100"
+        rotation="-90 0 0"
+        material="visible: false;"
+      ></a-entity>
 
-    <!-- Botón de inicio -->
-    <div id="menu">
-      <h1 style="color: white">
-        Experiencia <span style="color: #6ae5e0">Inmersiva</span>
-      </h1>
-      <button id="startingButton">Comenzar</button>
-    </div>
-  </a-entity>
+      <!-- Botón para entrar en VR -->
+      <a
+        type="button"
+        id="myEnterVRButton"
+        style="z-index: 999999; position: fixed"
+        >Entrar en VR</a
+      >
+    </a-scene>
 
-  <!-- Botón para entrar en VR -->
-  <a type="button" id="myEnterVRButton" style="z-index: 999999; position: fixed">Entrar en VR</a>
-
-</a-scene>
-
-<!-- Script para ocultar el splash después de cargar -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Ocultar el splash
-    document.getElementById('splash').style.display = 'none';
-  });
-</script>
-
-</body>
+    <!-- Script para ocultar el splash después de cargar -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Ocultar el splash
+        document.getElementById("splash").style.display = "none";
+      });
+    </script>
+  </body>
 </html>
