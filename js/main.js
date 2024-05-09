@@ -53,6 +53,4 @@ var typed2 = new Typed('#element', {
 startingButton.addEventListener('click', () => {
     // mostramos la escena 
     buttonIntoVR.click();
-
-    
 });
