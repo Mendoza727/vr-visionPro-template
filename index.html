@@ -84,7 +84,7 @@
           <h1 style="color: white">
             Experiencia <span style="color: #6ae5e0">Inmersiva</span>
           </h1>
-          <button onclick="showScene()" id="startingButton">Comenzar</button>
+          <button id="startingButton">Comenzar</button>
         </div>
       </div>
     </div>
@@ -183,38 +183,5 @@
         material="visible: false;"
       ></a-entity>
     </a-scene>
-
-    <script>
-      function showScene() {
-        // Muestra la escena
-        document.querySelector("a-scene").style.display = "block";
-        document.getElementById("splash").style.display = "none";
-      }
-
-      // Cargar el modelo FBX
-      const fbxUrl = "models/saxenda.fbx";
-
-      // Cargar el modelo FBX
-      const loader = new THREE.FBXLoader();
-      loader.load(fbxUrl, function (fbx) {
-        fbx.children.forEach((child) => {
-          // Crear el tooltip para el hijo actual
-          const tooltip = document.createElement("a-entity");
-          tooltip.setAttribute("position", "0 0 0"); // Ajusta la posición según sea necesario
-          tooltip.setAttribute("text", {
-            value: child.name,
-            color: "black",
-            align: "center",
-          }); // Establece el texto del tooltip
-
-          // Adjuntar el tooltip al hijo actual
-          child.add(tooltip.object3D);
-        });
-
-        // Agregar el modelo FBX con los tooltips al componente padre
-        const parentEntity = document.getElementById("parentEntity");
-        parentEntity.setObject3D("mesh", fbx.object3D);
-      });
-    </script>
   </body>
 </html>

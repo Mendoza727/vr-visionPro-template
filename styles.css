@@ -185,3 +185,24 @@
   .gear-inner .bar:nth-child(6) {
     transform: rotate(150deg);
   }
+
+  /* Animación de fadeOut */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Animación de fadeIn */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Aplicar animaciones a los elementos */
+.fadeOut {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+.fadeIn {
+    animation: fadeIn 1s ease forwards; /* Ajusta la duración y la función de temporización según sea necesario */
+}
