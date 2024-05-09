@@ -52,22 +52,14 @@
         <a-assets>
             <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
             <a-asset-item id="jeringa" src="models/jeringa.glb" draggable></a-asset-item>
-            <a-asset-item id="saxenda" src="models/saxenda.fbx"></a-asset-item>
         </a-assets>
         
         <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
-        <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7; transparent: true; opacity: 0.0;" scale="0.5 0.5 0.5" grabbable>
-            <a-entity gltf-model="#jeringa" id="modeloJeringa" scale="0.5 0.5 0.5" position="0 0 -0.1" draggable></a-entity>        
+        <a-box position="0 1.5 -0.5" rotation="0 0 0" material="color: #fcdab7; transparent: true; opacity: 0.0;" scale="0.5 0.5 0.5" grabbable>       
+            <a-entity fbx-model="src: url(models/saxenda.fbx);" position="0 0 -0.1" scale="0.5 0.5 0.5"></a-entity>
         </a-box>
         
 
-        <a-entity 
-            id="saxendaModel" 
-            fbx-model="#saxenda" 
-            scale="0.5 0.5 0.5" 
-            position="0 1.5 -0.5" 
-            draggable="true">
-        </a-entity>
 
         <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
 
