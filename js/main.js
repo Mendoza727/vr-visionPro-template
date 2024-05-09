@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(buttonIntoVR)
 
     setTimeout(() => {
-        var buttonIntoVR = document.getElementById('myEnterVRButton');
     
         // Simula un clic en el botón
         buttonIntoVR.click();
