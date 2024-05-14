@@ -67,11 +67,18 @@ const splash = document.getElementById("splash");
 
 // });
 
-var myvideo = document.querySelector('#saxenda');
-buttonIntoVR.addEventListener('click', () => {
-  myvideo.setAttribute('visible', true);
 
-
-  myvideo.play();
-})
+AFRAME.registerComponent('cursor-listener', {
+  init: function () {
+    var el = this.el;
+    el.addEventListener('click', function () {
+      var video = document.querySelector('#saxenda');
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  }
+});
   
