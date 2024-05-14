@@ -1,248 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Saxenda Experience Immersive</title>
-    <meta name="description" content="Hand Tracking! • A-Frame" />
-    <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe-master.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <link rel="stylesheet" href="styles.css" />
-    <!-- <script src="js/main.js" type="module"></script> -->
-  </head>
 
-  <style>
-    #menu {
-      display: none;
-    }
+<head>
+  <meta charset="utf-8" />
+  <title>Saxenda Experience Immersive</title>
+  <meta name="description" content="Hand Tracking! • A-Frame" />
+  <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe-master.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.4/dist/aframe-environment-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.2.0/build/aframe-html.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/handy-controls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.10/build/magnet-helpers.min.js"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"></script>
+  <script src="https://unpkg.com/aframe-tooltip-component/dist/aframe-tooltip-component.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="js/main.js" type="module"></script>
+</head>
 
-    #startingButton {
-      background: linear-gradient(94deg, #6be5ad 0%, #53afe4 100.05%);
-      border-radius: 8px;
-      border: none;
-      padding: 11px 23px;
-      font-size: 20px;
-      margin-top: 0px;
-      line-height: 24px;
-      height: 48px;
-      color: black;
-      cursor: pointer;
-    }
-
-    @keyframes clockwise {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes counter-clockwise {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(-360deg);
-      }
-    }
-
-    .gearbox {
-      background: rgb(31, 32, 33);
-      position: relative;
-      border: none;
-      border-radius: 6px;
-      display: block;
-    }
-
-    .gearbox .overlay {
-      border-radius: 6px;
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 10;
-      box-shadow: inset 0px 0px 20px black;
-      transition: background 0.2s;
-    }
-
-    .gearbox .overlay {
-      background: transparent;
-    }
-
-    .gear {
-      position: absolute;
-      height: 60px;
-      width: 60px;
-      box-shadow: 0px -1px 0px 0px #888888, 0px 1px 0px 0px black;
-      border-radius: 30px;
-    }
-
-    .gear.large {
-      height: 120px;
-      width: 120px;
-      border-radius: 60px;
-    }
-
-    .gear.large:after {
-      height: 96px;
-      width: 96px;
-      border-radius: 48px;
-      margin-left: -48px;
-      margin-top: -48px;
-    }
-
-    .gear.one {
-      top: 12px;
-      left: 10px;
-    }
-
-    .gear.two {
-      top: 61px;
-      left: 60px;
-    }
-
-    .gear.three {
-      top: 110px;
-      left: 10px;
-    }
-
-    .gear.four {
-      top: 13px;
-      left: 128px;
-    }
-
-    .gear:after {
-      content: "";
-      position: absolute;
-      height: 36px;
-      width: 36px;
-      border-radius: 36px;
-      background: #111;
-      top: 50%;
-      left: 50%;
-      margin-left: -18px;
-      margin-top: -18px;
-      z-index: 3;
-      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1),
-        inset 0px 0px 10px rgba(0, 0, 0, 0.1), inset 0px 2px 0px 0px #090909,
-        inset 0px -1px 0px 0px #888888;
-    }
-
-    .gear-inner {
-      position: relative;
-      height: 100%;
-      width: 100%;
-      background: #555;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .large .gear-inner {
-      border-radius: 60px;
-    }
-
-    .gear.one .gear-inner {
-      animation: counter-clockwise 3s infinite linear;
-    }
-
-    .gear.two .gear-inner {
-      animation: clockwise 3s infinite linear;
-    }
-
-    .gear.three .gear-inner {
-      animation: counter-clockwise 3s infinite linear;
-    }
-
-    .gear.four .gear-inner {
-      animation: counter-clockwise 6s infinite linear;
-    }
-
-    .gear-inner .bar {
-      background: #555;
-      height: 16px;
-      width: 76px;
-      position: absolute;
-      left: 50%;
-      margin-left: -38px;
-      top: 50%;
-      margin-top: -8px;
-      border-radius: 2px;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
-      border-right: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .large .gear-inner .bar {
-      margin-left: -68px;
-      width: 136px;
-    }
-
-    .gear-inner .bar:nth-child(2) {
-      transform: rotate(60deg);
-    }
-
-    .gear-inner .bar:nth-child(3) {
-      transform: rotate(120deg);
-    }
-
-    .gear-inner .bar:nth-child(4) {
-      transform: rotate(90deg);
-    }
-
-    .gear-inner .bar:nth-child(5) {
-      transform: rotate(30deg);
-    }
-
-    .gear-inner .bar:nth-child(6) {
-      transform: rotate(150deg);
-    }
-
-    /* Animación de fadeOut */
-    @keyframes fadeOut {
-      from {
-        opacity: 1;
-      }
-      to {
-        opacity: 0;
-      }
-    }
-
-    /* Animación de fadeIn */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* Aplicar animaciones a los elementos */
-    .fadeOut {
-      animation: fadeOut 0.5s ease forwards;
-    }
-
-    .fadeIn {
-      animation: fadeIn 1s ease forwards; /* Ajusta la duración y la función de temporización según sea necesario */
-    }
-
-    .typed-cursor {
-      display: none;
-    }
-  </style>
-
-  <body>
-    <div
+<body>
+  <!-- <div
       id="splash"
       style="
         background-color: rgb(31, 32, 33);
@@ -267,7 +48,7 @@
           box-sizing: border-box;
         "
       >
-        <!-- spinner load starting inmersive web -->
+
         <div class="gearbox" id="spinner">
           <div class="overlay"></div>
           <div class="gear one">
@@ -314,43 +95,81 @@
           <button id="startingButton">Comenzar</button>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <a-scene
-      physics="gravity: -9.8"
-      style="display: none"
-      id="scene"
-      xr-mode-ui="enterVRButton: #myEnterVRButton"
-    >
-      <!-- Añade el atributo physics -->
+  <a-scene physics="gravity: -9.8" id="scene" xr-mode-ui="enterVRButton: #myEnterVRButton">
+    <!-- Añade el atributo physics -->
 
-      <a-assets>
-        <a-asset-item
-          id="hospital-room"
-          src="models/hospital-room.glb"
-        ></a-asset-item>
-        <a-asset-item
-          id="jeringa"
-          src="models/untitled.glb"
-          draggable
-        ></a-asset-item>
-      </a-assets>
+    <a-assets>
 
-      <a-entity
-        gltf-model="#hospital-room"
-        position="0 0.2 -1"
-        scale="0.5 0.5 0.5"
-        draggable="true"
-      ></a-entity>
+      <!-- import scene hospital room environment -->
+      <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
 
-      <a-entity
-        gltf-model="#jeringa"
-        position="0 1.5 -0.5"
-        scale="0.5 0.5 0.5"
-        draggable="true"
-      ></a-entity>
+      <!-- import model jeringa saxenda -->
+      <a-asset-item id="jeringa" src="models/jeringa-saxenda.glb" draggable tooltip="foo: bar"></a-asset-item>
 
-      <!-- <a-box
+      <!-- import model table -->
+      <a-asset-item id="table" src="models/table-hospital.glb"></a-asset-item>
+
+      <!-- hospital bed model -->
+      <a-asset-item id="bedHospital" src="models/hospital_bed.glb"></a-asset-item>
+
+      <!-- chalk novo model -->
+      <a-asset-item id="chalk" src="models/aviso.glb"></a-asset-item>
+
+      <!-- tv video model -->
+      <a-asset-item id="tv" src="models/televisor_en_base.glb"></a-asset-item>
+
+      <!-- video saxenda -->
+      <video id="video" src="https://www.youtube.com/watch?v=P5P9Mr7uM20" loop></video>
+    </a-assets>
+
+
+    <!-- colocamos el modelo en la scena -->
+    <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
+
+    <!-- video saxenda -->
+    <a-plane position="0 1.5 -5" rotation="-90 0 0" width="6" height="3" color="#FFFFFF" material="shader: flat"></a-plane>
+    <a-video src="https://www.youtube.com/watch?v=P5P9Mr7uM20" width="6" height="3" position="0 1.5 -5" rotation="-90 0 0"></a-video>
+
+
+    <!-- colocamos la jeringa en la escena -->
+    <a-entity position="0 1 1.2" scale="2.5 2.5 2.5" rotation="0 60 0" draggable="">
+      <!-- Modelo GLTF -->
+      <a-entity gltf-model="#jeringa"></a-entity>
+    
+      <!-- Tooltip 1 -->
+      <a-entity class="tooltip tooltip1" position="0 0.2 0">
+        <a-plane color="#333" width="auto" height="auto" opacity="0.8"></a-plane>
+        <a-text value="Tooltip 1" color="white" align="center" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+    
+      <!-- Tooltip 2 -->
+      <a-entity class="tooltip tooltip2" position="0 0.2 0">
+        <a-plane color="#333" width="auto" height="auto" opacity="0.8"></a-plane>
+        <a-text value="Tooltip 2" color="white" align="center" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+    
+      <!-- Tooltip 3 -->
+      <a-entity class="tooltip tooltip3" position="0 0.2 0">
+        <a-plane color="#333" width="auto" height="auto" opacity="0.8"></a-plane>
+        <a-text value="Tooltip 3" color="white" align="center" scale="0.5 0.5 0.5"></a-text>
+      </a-entity>
+    </a-entity>
+
+    <!-- colocamos la cama en la escena -->
+    <a-entity gltf-model="#bedHospital" position="-4.2 0.2 1.7" scale="0.8 0.8 0.8" rotation="0 90 0"></a-entity>
+    
+    <!-- colocamos el televisor en la escena -->
+    <a-entity gltf-model="#tv" rotation="0 180 0" scale="0.3 0.3 0.3" position="0.5 -0.1 2.3"></a-entity>
+
+    <!-- colocamos la mesa en la escena -->
+    <a-entity gltf-model="#table" position="0 0.2 1.2" scale="0.3 0.2 0.4" draggable="true"
+      rotation="0 90 0"></a-entity>
+
+    <!-- colocamos el aviso en la escena -->
+    <a-entity gltf-model="#chalk" position="-1.3 0.2 1.5" scale="0.3 0.3 0.3" rotation="0 -30 0"></a-entity>
+    <!-- <a-box
         position="0 1.5 -0.5"
         rotation="0 0 0"
         material="color: #fcdab7; transparent: true; opacity: 0.0;"
@@ -365,129 +184,20 @@
         ></a-entity>
       </a-box> -->
 
-      <!-- Agrega un cuadro que se pueda agarrar con colisiones -->
+    <!-- Agrega el sistema de las manos -->
+    <a-entity id="leftHand" hand-controls="hand: left;" hand-tracking-controls="hand: left;"
+      hand-tracking-grab-controls="hand: left;"></a-entity>
 
-      <a-entity
-        id="menu"
-        menu
-        position="0 1.5 -0.5"
-        rotation="-45 0 0"
-        event-manager
-        visible="false"
-      >
-        <a-entity slider position="0 0.10 0"></a-entity>
-        <a-entity
-          id="sphereButton"
-          button="label: sphere"
-          position="-0.15 0 0"
-        ></a-entity>
-        <a-entity
-          id="boxButton"
-          button="label: box"
-          position="0 0 0"
-        ></a-entity>
-        <a-entity
-          id="torusButton"
-          button="label: torus"
-          position="0.15 0 0"
-        ></a-entity>
-        <a-entity
-          id="darkModeButton"
-          button="label: Dark Mode; width: 0.20; toggable: true"
-          position="0 -0.10 0"
-        ></a-entity>
-      </a-entity>
+    <a-entity id="rightHand" hand-controls="hand: right;" hand-tracking-controls="hand: right;"
+      hand-tracking-grab-controls="hand: right;"></a-entity>
 
-      <!-- Agrega el sistema de física -->
-      <a-entity
-        id="leftHand"
-        hand-controls="hand: left;"
-        hand-tracking-controls="hand: left;"
-        hand-tracking-grab-controls="hand: left;"
-      ></a-entity>
-      <a-entity
-        id="rightHand"
-        hand-controls="hand: right;"
-        hand-tracking-controls="hand: right;"
-        hand-tracking-grab-controls="hand: right;"
-      ></a-entity>
-      <a-entity
-        id="ground"
-        static-body
-        geometry="primitive: plane; width: 100; height: 100"
-        rotation="-90 0 0"
-        material="visible: false;"
-      ></a-entity>
 
-      <a
-        type="button"
-        id="myEnterVRButton"
-        style="z-index: 999999; position: fixed"
-        >Entrar en VR</a
-      >
-    </a-scene>
-  </body>
+    <!-- agregamos un suelo para las fisicas -->
+    <a-entity id="ground" static-body geometry="primitive: plane; width: 100; height: 100" rotation="-90 0 0"
+      material="visible: false;"></a-entity>
+
+    <a type="button" id="myEnterVRButton" style="z-index: 999999; position: fixed">Entrar en VR</a>
+  </a-scene>
+</body>
+
 </html>
-
-<!-- scripts -->
-<script type="module">
-  const spinner = document.getElementById("spinner");
-  const textSpinner = document.getElementById("textLoading");
-  const menu = document.getElementById("menu");
-  const typedCursor = document.getElementsByClassName("typed-cursor");
-  const buttonIntoVR = document.getElementById("myEnterVRButton");
-
-  const startingButton = document.getElementById("startingButton");
-  const scene = document.getElementById("scene");
-  const splash = document.getElementById("splash");
-
-  const fbxUrl = "models/saxenda.fbx";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    console.log(buttonIntoVR);
-  });
-
-  // animation typedJS+
-  var typed2 = new Typed("#element", {
-    strings: [
-      "Cargando modelos...",
-      "Cargando texturas...",
-      "Preparando experiencia...",
-      "Cargando espacio...",
-      "iniciando...",
-    ],
-    typeSpeed: 40,
-    backSpeed: 0,
-    fadeOut: true,
-    backDelay: 4000,
-    loop: true,
-    showCursor: true,
-    onComplete: function (self) {
-      // Esta función se ejecuta cuando se completa la animación de Typed
-      self.stop();
-
-      setTimeout(() => {
-        spinner.classList.add("fadeOut");
-        textSpinner.classList.add("fadeOut");
-        // Mostrar el menú con animación fadeIn después de que la animación de fadeOut haya terminado
-        setTimeout(() => {
-          // Esconder el loading
-          spinner.style.display = "none";
-          textSpinner.style.display = "none";
-
-          // Mostrar el menú con animación fadeIn
-          menu.style.display = "block";
-          menu.classList.add("fadeIn");
-        }, 1);
-      }, 1);
-    },
-  });
-
-  startingButton.addEventListener("click", () => {
-    // mostramos la escena
-    buttonIntoVR.click();
-    splash.style.display = 'none';
-    scene.style.display = 'block'
-
-  });
-</script>

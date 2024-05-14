@@ -15,6 +15,41 @@
     cursor: pointer;
 }
 
+.tooltip {
+  visibility: hidden;
+  width: auto;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  position: fixed;
+  z-index: 999999;
+}
+
+.tooltip1 {
+  top: 20px; /* Ajusta la posición del primer tooltip */
+  left: 20px; /* Ajusta la posición del primer tooltip */
+}
+
+.tooltip2 {
+  top: 40px; /* Ajusta la posición del segundo tooltip */
+  left: 40px; /* Ajusta la posición del segundo tooltip */
+}
+
+.tooltip3 {
+  top: 60px; /* Ajusta la posición del tercer tooltip */
+  left: 60px; /* Ajusta la posición del tercer tooltip */
+}
+
+a-entity:hover .tooltip {
+  visibility: visible;
+}
+
+.tooltip a-text {
+  font-size: 0.5;
+}
+
 
 @keyframes clockwise {
     0% {
