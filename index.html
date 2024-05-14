@@ -20,6 +20,7 @@
     <script src="js/main.js" type="module"></script>
     <script src="js/videoplayer.js"></script>
     <script src="js/button.js"></script>
+    <script src="js/event-manager.js"></script>
   </head>
 
   <body>
@@ -270,6 +271,16 @@
         scale="0.56 0.82 0.6"
         rotation="-11.9 150.1 0"
       ></a-image>
+
+
+      <a-entity id="menu" menu="" position="0 1.5 -0.5" rotation="-45 0 0" event-manager="">
+        <a-entity slider="" position="0 0.10 0"><a-entity geometry="" material=""></a-entity><a-entity geometry="" material="" pinchable="" rotation="" color-change=""></a-entity></a-entity>
+        <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
+        <a-entity id="boxButton" button="label: box" position="0 0 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
+        <a-entity id="torusButton" button="label: torus" position="0.15 0 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
+        <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true" position="0 -0.10 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
+        <a-entity geometry="" material="" position=""></a-entity></a-entity>
+
       <!-- <a-box
           position="0 1.5 -0.5"
           rotation="0 0 0"
