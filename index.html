@@ -120,18 +120,21 @@
       <!-- tv video model -->
       <a-asset-item id="tv" src="models/televisor_en_base.glb"></a-asset-item>
 
-      <!-- video saxenda -->
-      <video id="video" src="https://www.youtube.com/watch?v=P5P9Mr7uM20" loop></video>
+      <!-- assets de video -->
+      <img id="play" src="assets/imagenes/play.png" alt="play-button">
+      <img id="pause" src="assets/imagenes/pause.png" alt="pause-button">
+      <video id="saxenda" src="assets/videos/Como usar Saxenda.mp4" autoplay autoloop></video>
     </a-assets>
 
+    <!-- colocamos el video -->
+    <a-video src="#saxenda" width="1.4" height="0.8" position="-0.1 1.4 1.64" rotation="0 182 0">
+      <!-- Play/Pause button -->
+      <a-image id="videoControls" src="#play" position="0 -3 0" scale="0.1 0.1 0.1"></a-image>
+      <a-image id="videoControls" src="#pause" position="0 -3 0" scale="0.1 0.1 0.1"></a-image>
+    </a-video>
 
     <!-- colocamos el modelo en la scena -->
     <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
-
-    <!-- video saxenda -->
-    <a-plane position="0 1.5 -5" rotation="-90 0 0" width="6" height="3" color="#FFFFFF" material="shader: flat"></a-plane>
-    <a-video src="https://www.youtube.com/watch?v=P5P9Mr7uM20" width="6" height="3" position="0 1.5 -5" rotation="-90 0 0"></a-video>
-
 
     <!-- colocamos la jeringa en la escena -->
     <a-entity position="0 1 1.2" scale="2.5 2.5 2.5" rotation="0 60 0" draggable="">
@@ -185,11 +188,11 @@
       </a-box> -->
 
     <!-- Agrega el sistema de las manos -->
-    <a-entity id="leftHand" hand-controls="hand: left;" hand-tracking-controls="hand: left;"
-      hand-tracking-grab-controls="hand: left;"></a-entity>
+    <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: highPoly" hand-tracking-controls="hand: left; handModelStyle: highPoly"
+      hand-tracking-grab-controls="hand: left; handModelStyle: highPoly"></a-entity>
 
-    <a-entity id="rightHand" hand-controls="hand: right;" hand-tracking-controls="hand: right;"
-      hand-tracking-grab-controls="hand: right;"></a-entity>
+    <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: highPoly" hand-tracking-controls="hand: right; handModelStyle: highPoly"
+      hand-tracking-grab-controls="hand: right; handModelStyle: highPoly"></a-entity>
 
 
     <!-- agregamos un suelo para las fisicas -->
