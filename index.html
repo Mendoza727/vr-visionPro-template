@@ -189,10 +189,8 @@
         draggable=""
       >
         <!-- Modelo GLTF -->
-        <a-entity gltf-model="#jeringa" draggable="true">
-          <a-box draggable="true" scale="0.1 0.1 0.1" material="color: #fcdab7;"> 
-
-          </a-box>
+        <a-entity gltf-model="#jeringa">
+          <a-box grabbable scale="0.1 0.1 0.1" material="color: #fcdab7;"></a-box>
         </a-entity>
 
         <!-- Tooltip 1 -->
@@ -311,14 +309,14 @@
       <!-- Agrega el sistema de las manos -->
       <a-entity
         id="leftHand"
-        hand-controls="hand: left; handModelStyle: highPoly"
+        hand-controls="hand: left;"
         hand-tracking-controls="hand: left;"
         hand-tracking-grab-controls="hand: left;"
       ></a-entity>
 
       <a-entity
         id="rightHand"
-        hand-controls="hand: right; handModelStyle: highPoly"
+        hand-controls="hand: right;"
         hand-tracking-controls="hand: right;"
         hand-tracking-grab-controls="hand: right;"
       ></a-entity>
