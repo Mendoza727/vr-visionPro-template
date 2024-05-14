@@ -1,8 +1,9 @@
+/* global AFRAME */
 AFRAME.registerComponent('button', {
   schema: {
-    label: { default: 'label' },
-    width: { default: 0.11 },
-    toggable: { default: false }
+    label: {default: 'label'},
+    width: {default: 0.11},
+    toggable: {default: false}
   },
   init: function () {
     var el = this.el;
@@ -16,7 +17,7 @@ AFRAME.registerComponent('button', {
       depth: 0.04
     });
 
-    el.setAttribute('material', { color: this.color });
+    el.setAttribute('material', {color: this.color});
     el.setAttribute('pressable', '');
 
     labelEl.setAttribute('position', '0 0 0.02');
@@ -34,22 +35,12 @@ AFRAME.registerComponent('button', {
     this.el.addEventListener('stateremoved', this.stateChanged);
     this.el.addEventListener('pressedstarted', this.onPressedStarted);
     this.el.addEventListener('pressedended', this.onPressedEnded);
-
-    // Agregar evento de clic al botón
-    el.addEventListener('click', this.onClick.bind(this));
   },
 
   bindMethods: function () {
     this.stateChanged = this.stateChanged.bind(this);
     this.onPressedStarted = this.onPressedStarted.bind(this);
     this.onPressedEnded = this.onPressedEnded.bind(this);
-    this.onClick = this.onClick.bind(this); // Enlazar el método onClick
-  },
-
-  // Método para manejar el evento de clic
-  onClick: function () {
-    // Emitir evento 'click' al hacer clic en el botón
-    this.el.emit('click');
   },
 
   update: function (oldData) {
@@ -60,12 +51,12 @@ AFRAME.registerComponent('button', {
 
   stateChanged: function () {
     var color = this.el.is('pressed') ? 'green' : this.color;
-    this.el.setAttribute('material', { color: color });
+    this.el.setAttribute('material', {color: color});
   },
 
   onPressedStarted: function () {
     var el = this.el;
-    el.setAttribute('material', { color: 'green' });
+    el.setAttribute('material', {color: 'green'});
     el.emit('click');
     if (this.data.togabble) {
       if (el.is('pressed')) {
@@ -78,6 +69,6 @@ AFRAME.registerComponent('button', {
 
   onPressedEnded: function () {
     if (this.el.is('pressed')) { return; }
-    this.el.setAttribute('material', { color: this.color });
+    this.el.setAttribute('material', {color: this.color});
   }
 });
