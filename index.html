@@ -181,17 +181,22 @@
         draggable="true"
       ></a-entity>
 
+      <a-box grabbable position="0.11 1 0.4"
+      scale="2.5 2.5 2.5"  material="color: #fcdab7;">
+        <a-entity gltf-model="#jeringa">
+        </a-entity>
+      </a-box>
+
       <!-- colocamos la jeringa en la escena -->
       <a-entity
         position="0.11 1 0.4"
         scale="2.5 2.5 2.5"
         rotation="0 60 0"
-        draggable=""
+        draggable
       >
         <!-- Modelo GLTF -->
-        <a-entity gltf-model="#jeringa">
-          <a-box grabbable scale="0.1 0.1 0.1" material="color: #fcdab7;"></a-box>
-        </a-entity>
+        
+        
 
         <!-- Tooltip 1 -->
         <a-entity class="tooltip tooltip1" position="0 0.2 0">
