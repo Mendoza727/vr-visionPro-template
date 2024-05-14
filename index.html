@@ -181,74 +181,9 @@
         draggable="true"
       ></a-entity>
 
-      <a-box 
-        grabbable 
-        position="0.11 1 0.4"
-        scale="0.1 0.1 0.1"  
-        material="color: #fcdab7;">
-        <a-entity position="0.11 1 0.4"
-        scale="0.1 0.1 0.1" gltf-model="#jeringa"></a-entity>
+      <a-box grabbable position="0.11 1 0.4" scale="0.09 0.09 0.09" material="color: #fcdab7; transparent: true; opacity: 0" geometry="" obb-collider="">
+        <a-entity position="0.11 0.3 0.1" scale="25 25 25" gltf-model="#jeringa"></a-entity>
       </a-box>
-
-      <!-- colocamos la jeringa en la escena -->
-      <a-entity
-        position="0.11 1 0.4"
-        scale="2.5 2.5 2.5"
-        rotation="0 60 0"
-        draggable
-      >
-        <!-- Modelo GLTF -->
-        
-        
-
-        <!-- Tooltip 1 -->
-        <a-entity class="tooltip tooltip1" position="0 0.2 0">
-          <a-plane
-            color="#333"
-            width="auto"
-            height="auto"
-            opacity="0.8"
-          ></a-plane>
-          <a-text
-            value="Tooltip 1"
-            color="white"
-            align="center"
-            scale="0.5 0.5 0.5"
-          ></a-text>
-        </a-entity>
-
-        <!-- Tooltip 2 -->
-        <a-entity class="tooltip tooltip2" position="0 0.2 0">
-          <a-plane
-            color="#333"
-            width="auto"
-            height="auto"
-            opacity="0.8"
-          ></a-plane>
-          <a-text
-            value="Tooltip 2"
-            color="white"
-            align="center"
-            scale="0.5 0.5 0.5"
-          ></a-text>
-        </a-entity>
-
-        <!-- Tooltip 3 -->
-        <a-entity class="tooltip tooltip3" position="0 0.2 0">
-          <a-plane
-            color="#333"
-            width="auto"
-            height="auto"
-            opacity="0.8"
-          ></a-plane>
-          <a-text
-            value="Tooltip 3"
-            color="white"
-            align="center"
-            scale="0.5 0.5 0.5"
-          ></a-text>
-        </a-entity>
-      </a-entity>
 
       <!-- colocamos la cama en la escena -->
       <a-entity
@@ -289,30 +224,6 @@
         scale="0.56 0.82 0.6"
         rotation="-11.9 150.1 0"
       ></a-image>
-
-
-      <a-entity id="menu" menu="" position="0 1.5 -0.5" rotation="-45 0 0" event-manager="">
-        <a-entity slider="" position="0 0.10 0"><a-entity geometry="" material=""></a-entity><a-entity geometry="" material="" pinchable="" rotation="" color-change=""></a-entity></a-entity>
-        <a-entity id="sphereButton" button="label: sphere" position="-0.15 0 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
-        <a-entity id="boxButton" button="label: box" position="0 0 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
-        <a-entity id="torusButton" button="label: torus" position="0.15 0 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
-        <a-entity id="darkModeButton" button="label: Dark Mode; width: 0.20; toggable: true" position="0 -0.10 0" geometry="" material="" pressable=""><a-entity position="" text="" scale=""></a-entity></a-entity>
-        <a-entity geometry="" material="" position=""></a-entity></a-entity>
-
-      <!-- <a-box
-          position="0 1.5 -0.5"
-          rotation="0 0 0"
-          material="color: #fcdab7; transparent: true; opacity: 0.0;"
-          scale="0.5 0.5 0.5"
-          grabbable
-        >
-          <a-entity
-            fbx-model="src: url(untitled.fbx);"
-            position="0 0 -0.1"
-            scale="0.3 0.3 0.3"
-            id="parentEntity"
-          ></a-entity>
-        </a-box> -->
 
       <!-- Agrega el sistema de las manos -->
       <a-entity
