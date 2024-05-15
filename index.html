@@ -110,8 +110,14 @@
   
       <!-- colocamos el modelo en la scena -->
       <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5"></a-entity>
-      <a-box grabbable position="0 1 -1" rotation="45 45 0" material="color: #fcdab7" scale="0.5 0.5 0.5"></a-box>
+      <a-box grabbable grabbable="target: .collidable" position="0 1 -1" rotation="45 45 0" material="color: #fcdab7" scale="0.5 0.5 0.5">
+        <!-- Agrega el collider aabb -->
+        <a-entity aabb-collider="objects: .collidable"></a-entity>
+        <!-- Agrega el collider sphere -->
+        <a-entity sphere-collider="objects: .collidable"></a-entity>
+      </a-box>
 
+      <a-sphere class="collidable" position="0 0.5 -1" radius="0.5" color="#4CC3D9"></a-sphere>
       <a-box grabbable position="0 1 -1" scale="0.1 0.1 0.1" color="#fcdab7"></a-box>
   
       
@@ -133,12 +139,10 @@
       <!-- Agrega el sistema de las manos -->
       <a-entity id="leftHand" 
         hand-controls="hand: left;" 
-        hand-tracking-controls="hand: left;"
         hand-tracking-grab-controls="hand: left;"></a-entity>
   
       <a-entity id="rightHand" 
         hand-controls="hand: right;"
-        hand-tracking-controls="hand: right;"
         hand-tracking-grab-controls="hand: right;"></a-entity>
   
       <a type="button" id="myEnterVRButton" style="z-index: 999999; position: fixed">Entrar en VR</a>
