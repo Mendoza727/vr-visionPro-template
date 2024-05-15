@@ -53,15 +53,15 @@ const splash = document.getElementById("splash");
 //     },
 // });
 
-// startingButton.addEventListener("click", () => {
-//     // mostramos la escena
-//     buttonIntoVR.click();
-//     splash.style.display = 'none';
-//     scene.style.display = 'block'
-//     var video = document.querySelector('#saxenda-video');
-//     if (video.paused) {
-//       video.play();
-//     } else {
-//       video.pause();
-//     }
-// });
+startingButton.addEventListener("click", () => {
+    // mostramos la escena
+    buttonIntoVR.click();
+    splash.style.display = 'none';
+    scene.style.display = 'block'
+    var video = document.querySelector('#saxenda-video');
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+});

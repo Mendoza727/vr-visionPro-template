@@ -34,91 +34,147 @@
   </head>
 
   <body>
-    <a-scene gesture-color-change cursor="rayOrigin: mouse">
-      <a-asset>
-        <!-- assets para el correcto funcionamiento de la escena -->
-        <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item> <!-- modelo del hospital -->
-        <a-asset-item id="jeringa"       src="models/jeringa-saxenda.glb"></a-asset-item> <!--modelo del la jeringa-->
-        <a-asset-item id="table"         src="models/table-hospital.glb"></a-asset-item> <!--modelo del la mesa-->
-        <a-asset-item id="bedHospital"   src="models/hospital_bed.glb"></a-asset-item> <!--modelo del la cama-->
-        <a-asset-item id="chalk"         src="models/aviso.glb"></a-asset-item> <!--modelo del la aviso-->
-        <a-asset-item id="tv"            src="models/televisor_en_base.glb"></a-asset-item> <!--modelo del la televisor-->
-
-        <img id="play"  src="assets/imagenes/play.png" alt="play-button" /> <!-- imagen del boton reproducir-->
-        <img id="pause" src="assets/imagenes/pause.png" alt="pause-button" /> <!-- imagen del boton pausa -->
-        <img id="novo"  src="assets/imagenes/images.png" alt="aviso-img"> <!-- imagen logo novo nordisk -->
-        <video id=saxenda src="assets/videos/Como usar Saxenda.mp4" crossorigin="anonymous" webkit-playsinline playsinline autoplay></video> <!-- video introductorio-->
-      </a-asset>
-
-
-      <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity> <!-- modelo importado en la scene-->
-      <a-video id="video" src="assets/videos/Como usar Saxenda.mp4" crossorigin="anonymous" webkit-playsinline playsinline width="1.4" height="0.8" position="0.06 1.41 0.74" rotation="0 182 0"></a-video> <!-- iframe del video -->
+    <div id="splash" style="
+          background-color: rgb(31, 32, 33);
+          position: fixed;
+          width: 100%;
+          height: 100%;
+          z-index: 2000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        ">
+      <div style="
+            width: 320px;
+            max-width: 90%;
+            background: rgba(31, 32, 33, 0.78);
+            border-radius: 8px;
+            padding: 50px 20px 50px 20px;
+            box-sizing: border-box;
+          ">
+  
+  
+        <h2 id="textLoading" style="margin-top: 12pc; color: white">
+          <span id="element" style="margin-top: 2px"></span>
+        </h2>
+  
+        <div id="menu" style="display: block;">
+          <h1 style="color: white">
+            Experiencia <span style="color: #6ae5e0">Inmersiva</span>
+          </h1>
+          <button id="startingButton">Comenzar</button>
+        </div>
+      </div>
+    </div>
+  
+    <a-scene physics="gravity: -9.8" environment gesture-color-change id="scene" rotation="0 90 0" style="display: none;"
+      xr-mode-ui="enterVRButton: #myEnterVRButton">
+      <!-- Añade el atributo physics -->
+  
+      <a-assets>
+        <!-- import scene hospital room environment -->
+        <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item>
+  
+        <!-- import model jeringa saxenda -->
+        <a-asset-item id="jeringa" src="models/jeringa-saxenda.glb" draggable tooltip="foo: bar"></a-asset-item>
+  
+        <!-- import model table -->
+        <a-asset-item id="table" src="models/table-hospital.glb"></a-asset-item>
+  
+        <!-- hospital bed model -->
+        <a-asset-item id="bedHospital" src="models/hospital_bed.glb"></a-asset-item>
+  
+        <!-- chalk novo model -->
+        <a-asset-item id="chalk" src="models/aviso.glb"></a-asset-item>
+  
+        <!-- tv video model -->
+        <a-asset-item id="tv" src="models/televisor_en_base.glb"></a-asset-item>
+  
+        <!-- assets de video -->
+        <img id="play" src="assets/imagenes/play.png" alt="play-button" />
+        <img id="pause" src="assets/imagenes/pause.png" alt="pause-button" />
+        <img id="novo-adelante" src="assets/imagenes/images.png" alt="novo-nordisk">
+        <video id="saxenda" src="assets/videos/Como usar Saxenda.mp4"></video>
+      </a-assets>
+  
+  
+  
+      <!-- colocamos el video -->
+      <a-video src="#saxenda" width="1.4" height="0.8" position="0.06 1.41 0.74" rotation="0 182 0">
+        <!as-- Play/Pause button -->
+        <a-image play-pause id="videoControls" src="#play" position="0 -0.4 0" scale="0.6 0.6 0.6"
+          button="label: Play; width: 0.3;" cursor-listener pressable></a-image>
+      </a-video>
+  
+      <!-- colocamos el modelo en la scena -->
+      <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
+      <a-box grabbable position="0.11 1 0.4" scale="0.09 0.09 0.09"
+        material="color: #fcdab7; transparent: true; opacity: 1" geometry obb-collider>
+          <a-entity position="0.11 0.3 0.1" scale="25 25 25" gltf-model="#jeringa"></a-entity>
+      </a-box>
+  
+      
+      <!-- colocamos la cama en la escena -->
+      <a-entity gltf-model="#bedHospital" position="-4.1 0.2 1.3" scale="0.8 0.8 0.8" rotation="0 90 0"></a-entity>
+  
+      <!-- colocamos el televisor en la escena -->
       <a-entity gltf-model="#tv" rotation="0 180 0" scale="0.3 0.3 0.3" position="0.66 -0.1 1.4"></a-entity>
-
-      <a-entity
-        id="menu"
-        menu
-        position="0 1.5 -0.5"
-        rotation="-45 0 0"
-        event-manager
-      >
-        <a-entity slider position="0 0.10 0"></a-entity>
-        <a-entity
-          id="sphereButton"
-          button="label: sphere"
-          position="-0.15 0 0"
-        ></a-entity>
-        <a-entity
-          id="boxButton"
-          button="label: box"
-          position="0 0 0"
-        ></a-entity>
-        <a-entity
-          id="torusButton"
-          button="label: torus"
-          position="0.15 0 0"
-        ></a-entity>
-        <a-entity
-          id="darkModeButton"
-          button="label: Dark Mode; width: 0.20; toggable: true"
-          position="0 -0.10 0"
-        ></a-entity>
-        <a-entity
-          id="buttonPlay"
-          button="label: buttonPlay"
-          position="0.15 0 0"
-        ></a-entity>
-
-        <a-entity button="label: Play VR Video" id="vrGlasses" position="0 1.6 -2"></a-entity>
-      </a-entity>
-
-
-      <!-- Agregamos la entidades de las manos -->
-      <a-entity
-        laser-controls="hand: left"
-        hand-controls="hand: left; handModelStyle: highPoly; color: #add8e6;"
-        hand-tracking-controls="hand: left"
-        hand-tracking-grab-controls="hand: left;"
-      ></a-entity> <!-- Entidad de la mano derecha -->
-      <a-entity
-        laser-controls="hand: right"
-        hand-controls="hand: right; handModelStyle: highPoly; color: #add8e6;"
-        hand-tracking-controls="hand: right"
-        hand-tracking-grab-controls="hand: right;"
-      ></a-entity> <!-- Entidad de la mano izquierda -->
-      ></a-entity> 
+  
+      <!-- colocamos la mesa en la escena -->
+      <a-entity gltf-model="#table" position="0.07 0.2 0.4" scale="0.3 0.2 0.3" draggable="true"
+        rotation="0 90 0"></a-entity>
+  
+      <!-- colocamos el aviso en la escena -->
+      <a-entity gltf-model="#chalk" position="-1.1 0.2 0.4" scale="0.3 0.3 0.3" rotation="0 -30 0"></a-entity>
+  
+      <a-image src="#novo-adelante" position="-1.02 0.84 0.29" scale="0.56 0.82 0.6" rotation="-11.9 150.1 0"></a-image>
+  
+      <!-- Agrega el sistema de las manos -->
+      <a-entity id="leftHand" laser-controls="hand: left" hand-controls="hand: left;" hand-tracking-controls="hand: left;"
+        hand-tracking-grab-controls="hand: left;"></a-entity>
+  
+      <a-entity id="rightHand" laser-controls="hand: right"hand-controls="hand: right;" hand-tracking-controls="hand: right;"
+        hand-tracking-grab-controls="hand: right;"></a-entity>
+  
+      <!-- agregamos un suelo para las fisicas -->
+      <a-entity id="ground" static-body geometry="primitive: plane; width: 100; height: 100" rotation="-90 0 0"
+        material="visible: false;"></a-entity>
+  
+      <a type="button" id="myEnterVRButton" style="z-index: 999999; position: fixed">Entrar en VR</a>
     </a-scene>
   </body>
 </html>
 <script>
-  AFRAME.registerComponent('click-listener', {
-    init: function () {
-      var video = document.querySelector('#video');
-      this.el.addEventListener('click', function () {
-        if (video.paused) {
-          video.play();
+  document.addEventListener('DOMContentLoaded', function () {
+    // Espera a que el documento esté completamente cargado
+  
+    // Comprueba si el navegador es Safari en un dispositivo iOS
+    var isSafariOnIOS = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  
+    // Agrega un evento para el inicio de la sesión WebXR
+    document.addEventListener('xrsessionstart', function (event) {
+      // Verifica si el navegador es Safari en un dispositivo iOS
+      if (isSafariOnIOS) {
+        // Obtiene una referencia al video y al audio
+        var videoElement = document.querySelector('video');
+        var audioElement = document.querySelector('audio');
+  
+        // Intenta reproducir el video automáticamente
+        if (videoElement) {
+          videoElement.play().catch(function(error) {
+            console.error('Error al reproducir el video:', error);
+          });
         }
-      });
-    }
+  
+        // Intenta reproducir el audio automáticamente
+        if (audioElement) {
+          audioElement.play().catch(function(error) {
+            console.error('Error al reproducir el audio:', error);
+          });
+        }
+      }
+    });
   });
 </script>
