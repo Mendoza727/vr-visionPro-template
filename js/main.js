@@ -10,75 +10,70 @@ const scene = document.getElementById("scene");
 const splash = document.getElementById("splash");
 
 // const gbl = 'models/jeringa-saxenda.glb';
-// const loader = new THREE.GLTFLoader();
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     console.log(buttonIntoVR);
-//     console.warn(jeringa.getAttribute('src'))
-
-//     // imprimimos los componentes de la jeringa
-//     loader.load(gbl, () => {
-//         console.warn(gbl)
-//     });
-// });
+const loader = new THREE.GLTFLoader();
+document.addEventListener('DOMContentLoaded', () => {
+  loader.load(jeringa.getAttribute('src'), (gltf) => {
+    console.log(gltf.scene.children)
+  });
+})
 
 // animation typedJS+
-// var typed2 = new Typed("#element", {
-//     strings: [
-//         "Cargando modelos...",
-//         "Cargando texturas...",
-//         "Preparando experiencia...",
-//         "Cargando espacio...",
-//         "iniciando...",
-//     ],
-//     typeSpeed: 40,
-//     backSpeed: 0,
-//     fadeOut: true,
-//     backDelay: 4000,
-//     loop: true,
-//     showCursor: true,
-//     onComplete: function (self) {
-//         // Esta función se ejecuta cuando se completa la animación de Typed
-//         self.stop();
+var typed2 = new Typed("#element", {
+    strings: [
+        "Cargando modelos...",
+        "Cargando texturas...",
+        "Preparando experiencia...",
+        "Cargando espacio...",
+        "iniciando...",
+    ],
+    typeSpeed: 30,
+    backSpeed: 0,
+    fadeOut: true,
+    backDelay: 3000,
+    loop: true,
+    showCursor: true,
+    onComplete: function (self) {
+        // Esta función se ejecuta cuando se completa la animación de Typed
+        self.stop();
 
-//         setTimeout(() => {
-//             spinner.classList.add("fadeOut");
-//             textSpinner.classList.add("fadeOut");
-//             // Mostrar el menú con animación fadeIn después de que la animación de fadeOut haya terminado
-//             setTimeout(() => {
-//                 // Esconder el loading
-//                 spinner.style.display = "none";
-//                 textSpinner.style.display = "none";
+        setTimeout(() => {
+            spinner.classList.add("fadeOut");
+            textSpinner.classList.add("fadeOut");
+            // Mostrar el menú con animación fadeIn después de que la animación de fadeOut haya terminado
+            setTimeout(() => {
+                // Esconder el loading
+                spinner.style.display = "none";
+                textSpinner.style.display = "none";
 
-//                 // Mostrar el menú con animación fadeIn
-//                 menu.style.display = "block";
-//                 menu.classList.add("fadeIn");
-//             }, 1);
-//         }, 1);
-//     },
-// });
+                // Mostrar el menú con animación fadeIn
+                menu.style.display = "block";
+                menu.classList.add("fadeIn");
+            }, 1);
+        }, 1);
+    },
+});
 
-// startingButton.addEventListener("click", () => {
-//     // mostramos la escena
-//     //buttonIntoVR.click();
-//     splash.style.display = 'none';
-//     scene.style.display = 'block'
+startingButton.addEventListener("click", () => {
+    // mostramos la escena
+    buttonIntoVR.click();
+    splash.style.display = 'none';
+    scene.style.display = 'block'
+    var video = document.querySelector('#saxenda');
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+});
 
-// });
-
-
-AFRAME.registerComponent('cursor-listener', {
-  init: function () {
-    var el = this.el;
-    el.addEventListener('click', function () {
-      var video = document.querySelector('#saxenda');
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    });
-  }
+const tooltips = ['tooltip1', 'tooltip2', 'tooltip3'];
+tooltips.forEach(id => {
+  const tooltip = document.querySelector(`#${id}`);
+  tooltip.addEventListener('mouseenter', () => {
+    tooltip.setAttribute('visible', true);
+  });
+  tooltip.addEventListener('mouseleave', () => {
+    tooltip.setAttribute('visible', false);
+  });
 });
   
