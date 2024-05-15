@@ -19,7 +19,6 @@
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"></script>
-  <script src="https://unpkg.com/aframe-tooltip-component/dist/aframe-tooltip-component.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
   <script src="js/main.js" type="module"></script>
   <script src="js/pinchable.js"></script>
@@ -103,7 +102,7 @@
     </div>
   </div>
 
-  <a-scene physics="gravity: -9.8" id="scene" rotation="0 90 0" style="display: none;"
+  <a-scene physics="gravity: -9.8" environment gesture-color-change id="scene" rotation="0 90 0" style="display: none;"
     xr-mode-ui="enterVRButton: #myEnterVRButton">
     <!-- Añade el atributo physics -->
 
@@ -153,28 +152,8 @@
     <!-- colocamos el modelo en la scena -->
     <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity>
 
-    <a-box grabbable position="0.11 1 0.4" scale="0.09 0.09 0.09"
-      material="color: #fcdab7; transparent: true; opacity: 1" geometry="" obb-collider="">
-      <a-entity position="0.11 0.3 0.1" scale="25 25 25" gltf-model="#jeringa">
-        <!-- Tooltip 1 -->
-        <a-entity position="0 0.5 0" look-at="[camera]" visible="false" id="tooltip1">
-          <a-plane color="#333" width="1" height="0.5" opacity="0.8"></a-plane>
-          <a-text value="Tooltip 1" align="center" position="0 0 0.01"></a-text>
-        </a-entity>
-
-        <!-- Tooltip 2 -->
-        <a-entity position="0 1 0" look-at="[camera]" visible="false" id="tooltip2">
-          <a-plane color="#333" width="1" height="0.5" opacity="0.8"></a-plane>
-          <a-text value="Tooltip 2" align="center" position="0 0 0.01"></a-text>
-        </a-entity>
-
-        <!-- Tooltip 3 -->
-        <a-entity position="0 1.5 0" look-at="[camera]" visible="false" id="tooltip3">
-          <a-plane color="#333" width="1" height="0.5" opacity="0.8"></a-plane>
-          <a-text value="Tooltip 3" align="center" position="0 0 0.01"></a-text>
-        </a-entity>
-      </a-entity>
-      </a-entity>
+    <a-box grabbable position="0.11 1 0.4" scale="0.09 0.09 0.09" material="color: #fcdab7; transparent: true; opacity: 1">
+      <a-entity position="0.11 0.3 0.1" scale="25 25 25" gltf-model="#jeringa"></a-entity>
     </a-box>
 
     <!-- colocamos la cama en la escena -->
@@ -193,11 +172,8 @@
     <a-image src="#novo-adelante" position="-1.02 0.84 0.29" scale="0.56 0.82 0.6" rotation="-11.9 150.1 0"></a-image>
 
     <!-- Agrega el sistema de las manos -->
-    <a-entity id="leftHand" laser-controls="hand: left" hand-controls="hand: left;" hand-tracking-controls="hand: left;"
-      hand-tracking-grab-controls="hand: left;"></a-entity>
-
-    <a-entity id="rightHand" laser-controls="hand: right"hand-controls="hand: right;" hand-tracking-controls="hand: right;"
-      hand-tracking-grab-controls="hand: right;"></a-entity>
+    <a-entity laser-controls="hand: left" hand-tracking-controls="hand: left"></a-entity>
+    <a-entity laser-controls="hand: right" hand-tracking-controls="hand: right"></a-entity>
 
     <!-- agregamos un suelo para las fisicas -->
     <a-entity id="ground" static-body geometry="primitive: plane; width: 100; height: 100" rotation="-90 0 0"
