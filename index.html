@@ -110,7 +110,7 @@
       <!-- <a-entity draggable="true" position="0.11 0.3 0.1" scale="0.1 0.1 0.1" gltf-model="#jeringa" grabbable>
         <a-box position="0.11 1 0.4" scale="2 2 2"material="color: #fcdab7; transparent: true; opacity: 1" grabbable></a-box>
       </a-entity> -->
-      <a-box position="0.11 1 -1.1" scale="1 1 1"material="color: #fcdab7; transparent: true; opacity: 1" draggable></a-box>
+      <a-box position="0.11 1 -1.1" scale="1 1 1" material="color: #fcdab7; transparent: true; opacity: 1" grabbable></a-box>
       
 
       <!-- colocamos la cama en la escena -->
@@ -143,35 +143,3 @@
     </a-scene>
   </body>
 </html>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Espera a que el documento esté completamente cargado
-  
-    // Comprueba si el navegador es Safari en un dispositivo iOS
-    var isSafariOnIOS = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-  
-    // Agrega un evento para el inicio de la sesión WebXR
-    document.addEventListener('xrsessionstart', function (event) {
-      // Verifica si el navegador es Safari en un dispositivo iOS
-      if (isSafariOnIOS) {
-        // Obtiene una referencia al video y al audio
-        var videoElement = document.querySelector('video');
-        var audioElement = document.querySelector('audio');
-  
-        // Intenta reproducir el video automáticamente
-        if (videoElement) {
-          videoElement.play().catch(function(error) {
-            console.error('Error al reproducir el video:', error);
-          });
-        }
-  
-        // Intenta reproducir el audio automáticamente
-        if (audioElement) {
-          audioElement.play().catch(function(error) {
-            console.error('Error al reproducir el audio:', error);
-          });
-        }
-      }
-    });
-  });
-</script>
