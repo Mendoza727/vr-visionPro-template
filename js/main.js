@@ -53,27 +53,15 @@ const splash = document.getElementById("splash");
 //     },
 // });
 
-startingButton.addEventListener("click", () => {
-    // mostramos la escena
-    buttonIntoVR.click();
-    splash.style.display = 'none';
-    scene.style.display = 'block'
-    var video = document.querySelector('#saxenda');
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
-});
-
-const tooltips = ['tooltip1', 'tooltip2', 'tooltip3'];
-tooltips.forEach(id => {
-  const tooltip = document.querySelector(`#${id}`);
-  tooltip.addEventListener('mouseenter', () => {
-    tooltip.setAttribute('visible', true);
-  });
-  tooltip.addEventListener('mouseleave', () => {
-    tooltip.setAttribute('visible', false);
-  });
-});
-  
+// startingButton.addEventListener("click", () => {
+//     // mostramos la escena
+//     buttonIntoVR.click();
+//     splash.style.display = 'none';
+//     scene.style.display = 'block'
+//     var video = document.querySelector('#saxenda-video');
+//     if (video.paused) {
+//       video.play();
+//     } else {
+//       video.pause();
+//     }
+// });

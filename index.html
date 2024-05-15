@@ -34,17 +34,26 @@
   </head>
 
   <body>
-    <a-scene environment gesture-color-change>
+    <a-scene gesture-color-change>
       <a-asset>
         <!-- assets para el correcto funcionamiento de la escena -->
         <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item> <!-- modelo del hospital -->
+        <a-asset-item id="jeringa"       src="models/jeringa-saxenda.glb"></a-asset-item> <!--modelo del la jeringa-->
+        <a-asset-item id="table"         src="models/table-hospital.glb"></a-asset-item> <!--modelo del la mesa-->
+        <a-asset-item id="bedHospital"   src="models/hospital_bed.glb"></a-asset-item> <!--modelo del la cama-->
+        <a-asset-item id="chalk"         src="models/aviso.glb"></a-asset-item> <!--modelo del la aviso-->
+        <a-asset-item id="tv"            src="models/televisor_en_base.glb"></a-asset-item> <!--modelo del la televisor-->
 
-        <img id="play" src="assets/imagenes/play.png" alt="play-button" />
-        <img id="pause" src="assets/imagenes/pause.png" alt="pause-button" />
+        <img id="play"  src="assets/imagenes/play.png" alt="play-button" /> <!-- imagen del boton reproducir-->
+        <img id="pause" src="assets/imagenes/pause.png" alt="pause-button" /> <!-- imagen del boton pausa -->
+        <img id="novo"  src="assets/imagenes/images.png" alt="aviso-img"> <!-- imagen logo novo nordisk -->
+        <video id=saxenda-video src="assets/videos/Como usar Saxenda.mp4" autoplay></video> <!-- video introductorio-->
       </a-asset>
 
 
       <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity> <!-- modelo importado en la scene-->
+      <a-video id="video-saxenda" src="#saxenda-video" width="1.4" height="0.8" position="0.06 1.41 0.74" rotation="0 182 0"></a-video> <!-- iframe del video -->
+      <a-entity gltf-model="#tv" rotation="0 180 0" scale="0.3 0.3 0.3" position="0.66 -0.1 1.4"></a-entity>
 
       <a-entity
         id="menu"
@@ -73,6 +82,12 @@
           id="darkModeButton"
           button="label: Dark Mode; width: 0.20; toggable: true"
           position="0 -0.10 0"
+        ></a-entity>
+
+        <a-entity
+          id="buttonPlay"
+          button="label: buttonPlay"
+          position="0.2 0 0"
         ></a-entity>
       </a-entity>
 

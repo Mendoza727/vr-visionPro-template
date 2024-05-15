@@ -7,22 +7,25 @@ AFRAME.registerComponent('event-manager', {
     this.boxGeometryEl = document.querySelector('#boxGeometry');
     this.sphereGeometryEl = document.querySelector('#sphereGeometry');
     this.torusGeometryEl = document.querySelector('#torusGeometry');
-
+    
     this.boxButtonEl = document.querySelector('#boxButton');
     this.sphereButtonEl = document.querySelector('#sphereButton');
     this.torusButtonEl = document.querySelector('#torusButton');
     this.darkModeButtonEl = document.querySelector('#darkModeButton');
+    this.buttonPlay = document.querySelector('#buttonPlay'); 
 
     this.buttonToGeometry = {
       'boxButton': this.boxGeometryEl,
       'sphereButton': this.sphereGeometryEl,
-      'torusButton': this.torusGeometryEl
+      'torusButton': this.torusGeometryEl,
+      'buttonPlay': this.buttonPlay
     };
 
     this.boxButtonEl.addEventListener('click', this.onClick);
     this.sphereButtonEl.addEventListener('click', this.onClick);
     this.torusButtonEl.addEventListener('click', this.onClick);
     this.darkModeButtonEl.addEventListener('click', this.onClick);
+    this.buttonPlay.addEventListener('click', this.playVideo)
     this.boxButtonEl.addState('pressed');
   },
 
@@ -53,6 +56,23 @@ AFRAME.registerComponent('event-manager', {
         targetEl.setAttribute('button', 'label', 'Light Mode');
         this.el.sceneEl.setAttribute('environment', {preset: 'starry'});
         this.el.sceneEl.addState('starry');
+      }
+    } else {
+      targetEl.addState('pressed');
+    }
+  },
+
+  playVideo: function (evt) {
+    var targetEl = evt.target;
+    if (targetEl === this.buttonPlay) {
+      this.boxButtonEl.removeState('pressed');
+
+      const video = document.querySelector('#saxenda-video')
+
+      if (video.paused) {
+        video.play()
+      } else {
+        video.pause();
       }
     } else {
       targetEl.addState('pressed');
