@@ -8,10 +8,6 @@ AFRAME.registerComponent('pressable', {
     this.worldPosition = new THREE.Vector3();
     this.handEls = document.querySelectorAll('[hand-tracking-controls]');
     this.pressed = false;
-
-    // Añadir eventos de mouse
-    this.el.addEventListener('mousedown', this.onMouseDown.bind(this));
-    this.el.addEventListener('mouseup', this.onMouseUp.bind(this));
   },
 
   tick: function () {
@@ -40,17 +36,5 @@ AFRAME.registerComponent('pressable', {
     el.object3D.parent.localToWorld(worldPosition);
 
     return worldPosition.distanceTo(fingerPosition);
-  },
-
-  onMouseDown: function () {
-    this.el.emit('pressedstarted');
-    this.pressed = true;
-  },
-
-  onMouseUp: function () {
-    if (this.pressed) {
-      this.el.emit('pressedended');
-      this.pressed = false;
-    }
   }
 });
