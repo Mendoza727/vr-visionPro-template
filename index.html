@@ -34,7 +34,7 @@
   </head>
 
   <body>
-    <a-scene gesture-color-change>
+    <a-scene gesture-color-change cursor="rayOrigin: mouse">
       <a-asset>
         <!-- assets para el correcto funcionamiento de la escena -->
         <a-asset-item id="hospital-room" src="models/hospital-room.glb"></a-asset-item> <!-- modelo del hospital -->
@@ -52,7 +52,7 @@
 
 
       <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity> <!-- modelo importado en la scene-->
-      <a-video id="video-saxenda" src="#saxenda" width="1.4" height="0.8" position="0.06 1.41 0.74" rotation="0 182 0"></a-video> <!-- iframe del video -->
+      <a-video id="video" src="assets/videos/Como usar Saxenda.mp4" crossorigin="anonymous" webkit-playsinline playsinline width="1.4" height="0.8" position="0.06 1.41 0.74" rotation="0 182 0"></a-video> <!-- iframe del video -->
       <a-entity gltf-model="#tv" rotation="0 180 0" scale="0.3 0.3 0.3" position="0.66 -0.1 1.4"></a-entity>
 
       <a-entity
@@ -110,3 +110,15 @@
     </a-scene>
   </body>
 </html>
+<script>
+  AFRAME.registerComponent('click-listener', {
+    init: function () {
+      var video = document.querySelector('#video');
+      this.el.addEventListener('click', function () {
+        if (video.paused) {
+          video.play();
+        }
+      });
+    }
+  });
+</script>
