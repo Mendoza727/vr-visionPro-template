@@ -47,12 +47,12 @@
         <img id="play"  src="assets/imagenes/play.png" alt="play-button" /> <!-- imagen del boton reproducir-->
         <img id="pause" src="assets/imagenes/pause.png" alt="pause-button" /> <!-- imagen del boton pausa -->
         <img id="novo"  src="assets/imagenes/images.png" alt="aviso-img"> <!-- imagen logo novo nordisk -->
-        <video id=saxenda-video src="assets/videos/Como usar Saxenda.mp4" autoplay></video> <!-- video introductorio-->
+        <video id=saxenda src="assets/videos/Como usar Saxenda.mp4" crossorigin="anonymous" webkit-playsinline playsinline autoplay></video> <!-- video introductorio-->
       </a-asset>
 
 
       <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5" draggable="true"></a-entity> <!-- modelo importado en la scene-->
-      <a-video id="video-saxenda" src="#saxenda-video" width="1.4" height="0.8" position="0.06 1.41 0.74" rotation="0 182 0"></a-video> <!-- iframe del video -->
+      <a-video id="video-saxenda" src="#saxenda" width="1.4" height="0.8" position="0.06 1.41 0.74" rotation="0 182 0"></a-video> <!-- iframe del video -->
       <a-entity gltf-model="#tv" rotation="0 180 0" scale="0.3 0.3 0.3" position="0.66 -0.1 1.4"></a-entity>
 
       <a-entity
@@ -83,12 +83,13 @@
           button="label: Dark Mode; width: 0.20; toggable: true"
           position="0 -0.10 0"
         ></a-entity>
-
         <a-entity
           id="buttonPlay"
           button="label: buttonPlay"
-          position="0.4 0 0"
+          position="0.15 0 0"
         ></a-entity>
+
+        <a-entity button="label: Play VR Video" id="vrGlasses" position="0 1.6 -2"></a-entity>
       </a-entity>
 
 

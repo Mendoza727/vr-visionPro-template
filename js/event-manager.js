@@ -1,6 +1,5 @@
 /* global AFRAME */
 AFRAME.registerComponent('event-manager', {
-
   init: function () {
     this.bindMethods();
 
@@ -13,6 +12,7 @@ AFRAME.registerComponent('event-manager', {
     this.torusButtonEl = document.querySelector('#torusButton');
     this.darkModeButtonEl = document.querySelector('#darkModeButton');
     this.buttonPlay = document.querySelector('#buttonPlay'); 
+    this.vrGlassesEl = document.querySelector('#vrGlasses'); // Agrega la entidad de las gafas de VR
 
     this.buttonToGeometry = {
       'boxButton': this.boxGeometryEl,
@@ -25,12 +25,14 @@ AFRAME.registerComponent('event-manager', {
     this.sphereButtonEl.addEventListener('click', this.onClick);
     this.torusButtonEl.addEventListener('click', this.onClick);
     this.darkModeButtonEl.addEventListener('click', this.onClick);
-    this.buttonPlay.addEventListener('click', this.playVideo)
+    this.buttonPlay.addEventListener('click', this.playVideo);
+    this.vrGlassesEl.addEventListener('click', this.playVideo); // Añade el evento para las gafas de VR
     this.boxButtonEl.addState('pressed');
   },
 
   bindMethods: function () {
     this.onClick = this.onClick.bind(this);
+    this.playVideo = this.playVideo.bind(this); // Asegúrate de vincular el método playVideo
   },
 
   onClick: function (evt) {
@@ -63,19 +65,12 @@ AFRAME.registerComponent('event-manager', {
   },
 
   playVideo: function (evt) {
-    var targetEl = evt.target;
-    if (targetEl === this.buttonPlay) {
-      this.boxButtonEl.removeState('pressed');
+    const video = document.querySelector('#saxenda');
 
-      const video = document.querySelector('#saxenda-video')
-
-      if (video.paused) {
-        video.play()
-      } else {
-        video.pause();
-      }
+    if (video.paused) {
+      video.play();
     } else {
-      targetEl.addState('pressed');
+      video.pause();
     }
   }
 });
