@@ -110,9 +110,9 @@
   
       <!-- colocamos el modelo en la scena -->
       <a-entity gltf-model="#hospital-room" position="0 0.2 -1" scale="0.5 0.5 0.5"></a-entity>
-      <a-box grabbable position="0 2.0 -1" rotation="45 45 0" material="color: #fcdab7" scale="0.5 0.5 0.5"></a-box>
+      <a-box grabbable position="0 1 -1" rotation="45 45 0" material="color: #fcdab7" scale="0.5 0.5 0.5"></a-box>
 
-      <a-box grabbable position="0 1 0" scale="0.1 0.1 0.1" color="#fcdab7"></a-box>
+      <a-box grabbable position="0 1 -1" scale="0.1 0.1 0.1" color="#fcdab7"></a-box>
   
       
       <!-- colocamos la cama en la escena -->
@@ -145,35 +145,3 @@
     </a-scene>
   </body>
 </html>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Espera a que el documento esté completamente cargado
-  
-    // Comprueba si el navegador es Safari en un dispositivo iOS
-    var isSafariOnIOS = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) && !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-  
-    // Agrega un evento para el inicio de la sesión WebXR
-    document.addEventListener('xrsessionstart', function (event) {
-      // Verifica si el navegador es Safari en un dispositivo iOS
-      if (isSafariOnIOS) {
-        // Obtiene una referencia al video y al audio
-        var videoElement = document.querySelector('video');
-        var audioElement = document.querySelector('audio');
-  
-        // Intenta reproducir el video automáticamente
-        if (videoElement) {
-          videoElement.play().catch(function(error) {
-            console.error('Error al reproducir el video:', error);
-          });
-        }
-  
-        // Intenta reproducir el audio automáticamente
-        if (audioElement) {
-          audioElement.play().catch(function(error) {
-            console.error('Error al reproducir el audio:', error);
-          });
-        }
-      }
-    });
-  });
-</script>
