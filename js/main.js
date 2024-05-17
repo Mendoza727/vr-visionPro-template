@@ -58,10 +58,4 @@ startingButton.addEventListener("click", () => {
     buttonIntoVR.click();
     splash.style.display = 'none';
     scene.style.display = 'block'
-    var video = document.querySelector('#saxenda-video');
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
 });
